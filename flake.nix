@@ -62,8 +62,18 @@
       mynvim = import ./nix/neovim.nix {
         inherit self vimPlugins pkgs;
       };
+
+      mynvimContainer = pkgs.dockerTools.buildLayeredImage {
+        name = "myneovim";
+        tag = self.shortRev or self.dirtyShortRev or "unknown-dirty";
+        config = {
+          Entrypoint = [
+          "${mynvim}/bin/nvim"
+          ];
+        };
+      };
     in {
-      inherit mynvim;
+      inherit mynvim mynvimContainer;
       default = mynvim;
     });
 
