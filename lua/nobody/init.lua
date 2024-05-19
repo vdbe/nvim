@@ -1,3 +1,6 @@
+vim.g.mapleader = ","
+vim.g.maplocalleader = "\\"
+
 require("lazy").setup(
   { -- plugins
     {
@@ -24,7 +27,7 @@ require("lazy").setup(
     performance = {
       rtp = {
         paths = {
-          vim.g.nix_plugins_path -- Not needed when merging plugins with `symLinkJoin`
+          -- vim.g.nix_plugins_path -- Not needed when merging plugins with `symLinkJoin`
         },
       },
     },

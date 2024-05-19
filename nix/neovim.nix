@@ -44,17 +44,19 @@
         paths = plugins ++ [config] ++ extraPlugins;
       })
     ];
-    customRC = ''
-      let g:nix_plugins_path = '${config}'
-      lua require("nobody")
-    '';
   };
 in
   pkgs.wrapNeovimUnstable neovim-unwrapped (lib.recursiveUpdate
     neovimConfig
     {
+      extraName = "-my";
       wrapperArgs =
         lib.escapeShellArgs neovimConfig.wrapperArgs
         + " "
         + ''--suffix PATH : "${lib.makeBinPath extraPackages'}"'';
+
+      luaRcContent = ''
+        vim.g.nix_plugins_path = '${config}'
+        require("nobody")
+      '';
     })

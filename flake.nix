@@ -68,7 +68,7 @@
         tag = self.shortRev or self.dirtyShortRev or "unknown-dirty";
         config = {
           Entrypoint = [
-          "${mynvim}/bin/nvim"
+            "${mynvim}/bin/nvim"
           ];
         };
       };
