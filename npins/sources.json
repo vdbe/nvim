@@ -1,0 +1,35 @@
+{
+  "pins": {
+    "catppuccin.nvim": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "catppuccin",
+        "repo": "nvim"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v1.7.0",
+      "revision": "a1439ad7c584efb3d0ce14ccb835967f030450fe",
+      "url": "https://api.github.com/repos/catppuccin/nvim/tarball/v1.7.0",
+      "hash": "1ngjll0khnx1nighazw64kvfdl139z8xhv0hh2r4bb40ynxnhdf9"
+    },
+    "lazy.nvim": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "folke",
+        "repo": "lazy.nvim"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v10.20.4",
+      "revision": "758bb5de98b805acc5eeed8cdc8ac7f0bc4b0b86",
+      "url": "https://api.github.com/repos/folke/lazy.nvim/tarball/v10.20.4",
+      "hash": "0sc0590qgwpr9zxmks6k9bfh916zz8n4pv8j4idcxch9vv39inm4"
+    }
+  },
+  "version": 3
+}

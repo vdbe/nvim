@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "My neovim config";
 
   inputs = {
     systems.url = "github:nix-systems/default";
@@ -16,24 +16,60 @@
 
     forSystem = system: fn: fn nixpkgs.legacyPackages.${system};
     forAllSystems = fn: nixpkgs.lib.genAttrs systems (system: forSystem system fn);
+
+    mapAttrs' = f: set:
+      builtins.listToAttrs (builtins.map (attr: f attr set.${attr}) (builtins.attrNames set));
+    namePlugin = name: builtins.replaceStrings ["."] ["-"] name;
+
+    pluginSources = mapAttrs' (n: v: {
+      name = namePlugin n;
+      value = v;
+    }) (import ./npins);
+
+    mkPlugins = buildVimPlugin: (builtins.mapAttrs (n: v:
+      buildVimPlugin {
+        pname = n;
+        version = v.version;
+        src = v;
+      })
+    pluginSources);
   in {
     devShells = forAllSystems (pkgs: {
       default = pkgs.mkShellNoCC {
-        packages = with pkgs; [
-          # nix
-          self.formatter.${pkgs.system}
-          deadnix
-          nixd
-          statix
-        ];
+        packages =
+          [
+            # nix
+            self.formatter.${pkgs.system}
+          ]
+          ++ (with pkgs; [
+            npins
+
+            # nix
+            deadnix
+            nixd
+            statix
+          ]);
       };
     });
 
     formatter = forAllSystems (pkgs: pkgs.alejandra);
 
-    packages = forAllSystems (pkgs: rec {
-      mynvim = import ./neovim.nix self pkgs;
+    packages = forAllSystems (pkgs: let
+      inherit (self.legacyPackages.${pkgs.system}) vimPlugins;
+
+      mynvim = import ./neovim.nix {
+        inherit self vimPlugins pkgs;
+      };
+    in {
+      inherit mynvim;
       default = mynvim;
+    });
+
+    legacyPackages = forAllSystems (pkgs: {
+      vimPlugins =
+        pkgs.lib.recursiveUpdate
+        pkgs.vimPlugins
+        (mkPlugins (pkgs.vimUtils.buildVimPlugin));
     });
   };
 }

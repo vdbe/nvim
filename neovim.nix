@@ -1,6 +1,11 @@
-self: {
-  lib,
+{
+  self ? null,
   pkgs,
+  lib ? pkgs.lib,
+  vimPlugins ? pkgs.vimPlugins,
+  neovim-unwrapped ? pkgs.neovim-unwrapped,
+  extraPlugins ? [],
+  extraPackages ? [],
   ...
 }: let
   inherit (lib) fileset;
@@ -18,27 +23,38 @@ self: {
     };
   };
 
-
-  plugins = with pkgs.vimPlugins; [
+  plugins = with vimPlugins; [
     (lazy-nvim.overrideAttrs (_: previousAttrs: {
-      patches = previousAttrs.patches ++ [./patches/lazy.nvim.patch];
+      patches = previousAttrs.patches or [] ++ [./patches/lazy.nvim.patch];
     }))
     catppuccin-nvim
   ];
 
-  extraPackages = [];
+  extraPackages' =
+    [
+    ]
+    ++ extraPackages;
 
   neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
     withPython3 = true;
     withRuby = false;
-    plugins = [(pkgs.symlinkJoin {
-          name = "neovim-plugins";
-          paths = plugins ++ [config];
-      })];
+    plugins = [
+      (pkgs.symlinkJoin {
+        name = "neovim-plugins";
+        paths = plugins ++ [config] ++ extraPlugins;
+      })
+    ];
     customRC = ''
       let g:nix_plugins_path = '${config}'
       lua require("nobody")
     '';
   };
 in
-  pkgs.wrapNeovimUnstable pkgs.neovim-unwrapped neovimConfig
+  pkgs.wrapNeovimUnstable neovim-unwrapped (lib.recursiveUpdate
+    neovimConfig
+    {
+      wrapperArgs =
+        lib.escapeShellArgs neovimConfig.wrapperArgs
+        + " "
+        + ''--suffix PATH : "${lib.makeBinPath extraPackages'}"'';
+    })
