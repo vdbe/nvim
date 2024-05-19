@@ -24,7 +24,7 @@
     pluginSources = mapAttrs' (n: v: {
       name = namePlugin n;
       value = v;
-    }) (import ./npins);
+    }) (import ./nix/npins);
 
     mkPlugins = buildVimPlugin: (builtins.mapAttrs (n: v:
       buildVimPlugin {
@@ -34,6 +34,8 @@
       })
     pluginSources);
   in {
+    checks = forAllSystems (pkgs: import ./nix/checks.nix {inherit pkgs self;});
+
     devShells = forAllSystems (pkgs: {
       default = pkgs.mkShellNoCC {
         packages =
@@ -57,7 +59,7 @@
     packages = forAllSystems (pkgs: let
       inherit (self.legacyPackages.${pkgs.system}) vimPlugins;
 
-      mynvim = import ./neovim.nix {
+      mynvim = import ./nix/neovim.nix {
         inherit self vimPlugins pkgs;
       };
     in {

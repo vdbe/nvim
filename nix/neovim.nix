@@ -15,10 +15,10 @@
     version = self.shortRev or self.dirtyShortRev or "unknown-dirty";
 
     src = fileset.toSource {
-      root = ./.;
+      root = ../.;
       fileset = fileset.unions [
-        ./lua
-        ./plugin
+        ../lua
+        ../plugin
       ];
     };
   };
