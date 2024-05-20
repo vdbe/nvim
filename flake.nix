@@ -16,25 +16,10 @@
 
     forSystem = system: fn: fn nixpkgs.legacyPackages.${system};
     forAllSystems = fn: nixpkgs.lib.genAttrs systems (system: forSystem system fn);
-
-    mapAttrs' = f: set:
-      builtins.listToAttrs (builtins.map (attr: f attr set.${attr}) (builtins.attrNames set));
-    namePlugin = name: builtins.replaceStrings ["."] ["-"] name;
-
-    pluginSources = mapAttrs' (n: v: {
-      name = namePlugin n;
-      value = v;
-    }) (import ./nix/npins);
-
-    mkPlugins = buildVimPlugin: (builtins.mapAttrs (n: v:
-      buildVimPlugin {
-        pname = n;
-        version = v.version;
-        src = v;
-      })
-    pluginSources);
   in {
-    checks = forAllSystems (pkgs: import ./nix/checks.nix {inherit pkgs self;});
+    apps = forAllSystems (pkgs: import ./nix/apps.nix {inherit self pkgs;});
+
+    checks = forAllSystems (pkgs: import ./nix/checks.nix {inherit self pkgs;});
 
     devShells = forAllSystems (pkgs: {
       default = pkgs.mkShellNoCC {
@@ -54,34 +39,15 @@
       };
     });
 
-    formatter = forAllSystems (pkgs: pkgs.alejandra);
+    formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
 
     packages = forAllSystems (pkgs: let
-      inherit (self.legacyPackages.${pkgs.system}) vimPlugins;
-
-      mynvim = import ./nix/neovim.nix {
-        inherit self vimPlugins pkgs;
-      };
-
-      mynvimContainer = pkgs.dockerTools.buildLayeredImage {
-        name = "myneovim";
-        tag = self.shortRev or self.dirtyShortRev or "unknown-dirty";
-        config = {
-          Entrypoint = [
-            "${mynvim}/bin/nvim"
-          ];
-        };
-      };
+      inherit (self.legacyPackages.${pkgs.system}) neovim;
     in {
-      inherit mynvim mynvimContainer;
-      default = mynvim;
+      inherit neovim;
+      default = neovim;
     });
 
-    legacyPackages = forAllSystems (pkgs: {
-      vimPlugins =
-        pkgs.lib.recursiveUpdate
-        pkgs.vimPlugins
-        (mkPlugins (pkgs.vimUtils.buildVimPlugin));
-    });
+    legacyPackages = forAllSystems (pkgs: import ./nix/pkgs {inherit pkgs;});
   };
 }

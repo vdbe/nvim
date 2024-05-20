@@ -1,23 +1,23 @@
 {
-  pkgs,
   self,
+  pkgs,
 }: let
   inherit (pkgs) lib;
   nvim = self.packages.${pkgs.system}.default;
-in {
-  check-headless = pkgs.runCommand "check-headless" {} ''
-    mkdir -p $out/{.config, .local/state, .local/share, .cache}
-    XDG_CONFIG_HOME="$out/.config" \
-      XDG_STATE_HOME="$out/.local/state" \
-      XDG_CACHE_HOME="$out/.cache" \
-      XDG_DATA_HOME="$out/.local/share" \
-      ${lib.getExe nvim} --headless +qa 2>"$out/messages.txt"
 
-      cat "$out/messages.txt"
-      test -s "$out/messages.txt" && exit 1
+  mkHeadlessCheck = name: args:
+    pkgs.runCommand name {} ''
+      export HOME="$(mktemp -d)"
+      ${lib.getExe nvim} --headless ${args} +qa 2>$out
+
+      cat $out
+      test -s $out && exit 1
 
       exit 0
-  '';
+    '';
+in {
+  check-headless = mkHeadlessCheck "check-headless" "";
+  check-nvim-treesitter = mkHeadlessCheck "check-headless" "test.rs +InspectTree";
 
   # check-health = pkgs.runCommand "check-lazy-health" {} ''
   #   mkdir -p $out{.config, .local/state, .local/share, .cache}

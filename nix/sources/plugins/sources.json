@@ -29,6 +29,18 @@
       "revision": "758bb5de98b805acc5eeed8cdc8ac7f0bc4b0b86",
       "url": "https://api.github.com/repos/folke/lazy.nvim/tarball/v10.20.4",
       "hash": "0sc0590qgwpr9zxmks6k9bfh916zz8n4pv8j4idcxch9vv39inm4"
+    },
+    "nvim-treesitter": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter"
+      },
+      "branch": "master",
+      "revision": "7c9c5bed8340031f8a6dad47a58a26eaf15b9a56",
+      "url": "https://github.com/nvim-treesitter/nvim-treesitter/archive/7c9c5bed8340031f8a6dad47a58a26eaf15b9a56.tar.gz",
+      "hash": "0lki07zrpakm944kn0dpxkc2b50ank5n8idnvkl3lrwlcqyfjaqg"
     }
   },
   "version": 3

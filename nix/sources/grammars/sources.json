@@ -1,0 +1,50 @@
+{
+  "pins": {
+    "tree-sitter-c": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "tree-sitter",
+        "repo": "tree-sitter-c"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v0.21.1",
+      "revision": "82fb86aa544843bd17a9f0f3dc16edf645a34349",
+      "url": "https://api.github.com/repos/tree-sitter/tree-sitter-c/tarball/v0.21.1",
+      "hash": "0sycp85pl0yr3d35fj17p1kbz8j3xj04ql35xmmd78f9592s0862"
+    },
+    "tree-sitter-rust": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "tree-sitter",
+        "repo": "tree-sitter-rust"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v0.21.2",
+      "revision": "04352146022062c101b8ddd853adf17eadd8cf56",
+      "url": "https://api.github.com/repos/tree-sitter/tree-sitter-rust/tarball/v0.21.2",
+      "hash": "1xn8l6jy91arhlxfmnlcw2lq41xhjr17rh3j63pc8mwjybly2970"
+    },
+    "tree-sitter-typescript": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "tree-sitter",
+        "repo": "tree-sitter-typescript"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v0.21.1",
+      "revision": "7b4275d077ae196fc0ce42ab3ad091574e3ec519",
+      "url": "https://api.github.com/repos/tree-sitter/tree-sitter-typescript/tarball/v0.21.1",
+      "hash": "1w113zbh322i39pr3cym4n4kvs33sg004mpca5mydh1nx19w06x1"
+    }
+  },
+  "version": 3
+}
