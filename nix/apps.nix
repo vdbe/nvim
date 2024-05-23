@@ -2,13 +2,15 @@
   pkgs,
   lib ? pkgs.lib,
   ...
-}: let
+}:
+let
   sources = "nix/sources";
 
-  mkUpdateSource = name: path:
+  mkUpdateSource =
+    name: path:
     pkgs.writeShellApplication {
       inherit name;
-      runtimeInputs = with pkgs; [npins];
+      runtimeInputs = with pkgs; [ npins ];
       text = ''
         npins --directory '${path}' update "$@"
       '';
@@ -19,7 +21,10 @@
 
   update-sources = pkgs.writeShellApplication {
     name = "update-sources";
-    runtimeInputs = [update-plugins update-grammars];
+    runtimeInputs = [
+      update-plugins
+      update-grammars
+    ];
     text = ''
       set -e
       update-plugins "$@"
@@ -42,4 +47,4 @@
     };
   };
 in
-  apps
+apps

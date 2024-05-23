@@ -1,12 +1,11 @@
-{
-  self,
-  pkgs,
-}: let
+{ self, pkgs }:
+let
   inherit (pkgs) lib;
   nvim = self.packages.${pkgs.system}.default;
 
-  mkHeadlessCheck = name: args:
-    pkgs.runCommand name {} ''
+  mkHeadlessCheck =
+    name: args:
+    pkgs.runCommand name { } ''
       export HOME="$(mktemp -d)"
       ${lib.getExe nvim} --headless ${args} +qa 2>$out
 
@@ -15,7 +14,8 @@
 
       exit 0
     '';
-in {
+in
+{
   check-headless = mkHeadlessCheck "check-headless" "";
   check-nvim-treesitter = mkHeadlessCheck "check-headless" "test.rs +InspectTree";
 

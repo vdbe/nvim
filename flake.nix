@@ -7,47 +7,50 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    ...
-  } @ inputs: let
-    systems = import inputs.systems;
+  outputs =
+    { self, nixpkgs, ... }@inputs:
+    let
+      systems = import inputs.systems;
 
-    forSystem = system: fn: fn nixpkgs.legacyPackages.${system};
-    forAllSystems = fn: nixpkgs.lib.genAttrs systems (system: forSystem system fn);
-  in {
-    apps = forAllSystems (pkgs: import ./nix/apps.nix {inherit self pkgs;});
+      forSystem = system: fn: fn nixpkgs.legacyPackages.${system};
+      forAllSystems = fn: nixpkgs.lib.genAttrs systems (system: forSystem system fn);
+    in
+    {
+      apps = forAllSystems (pkgs: import ./nix/apps.nix { inherit self pkgs; });
 
-    checks = forAllSystems (pkgs: import ./nix/checks.nix {inherit self pkgs;});
+      checks = forAllSystems (pkgs: import ./nix/checks.nix { inherit self pkgs; });
 
-    devShells = forAllSystems (pkgs: {
-      default = pkgs.mkShellNoCC {
-        packages =
-          [
-            # nix
-            self.formatter.${pkgs.system}
-          ]
-          ++ (with pkgs; [
-            npins
+      devShells = forAllSystems (pkgs: {
+        default = pkgs.mkShellNoCC {
+          packages =
+            [
+              # nix
+              self.formatter.${pkgs.system}
+            ]
+            ++ (with pkgs; [
+              npins
 
-            # nix
-            deadnix
-            nixd
-            statix
-          ]);
-      };
-    });
+              # nix
+              deadnix
+              nixd
+              statix
+            ]);
+        };
+      });
 
-    formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
+      formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
 
-    packages = forAllSystems (pkgs: let
-      inherit (self.legacyPackages.${pkgs.system}) neovim;
-    in {
-      inherit neovim;
-      default = neovim;
-    });
+      packages = forAllSystems (
+        pkgs:
+        let
+          inherit (self.legacyPackages.${pkgs.system}) neovim;
+        in
+        {
+          inherit neovim;
+          default = neovim;
+        }
+      );
 
-    legacyPackages = forAllSystems (pkgs: import ./nix/pkgs {inherit pkgs;});
-  };
+      legacyPackages = forAllSystems (pkgs: import ./nix/pkgs { inherit pkgs; });
+    };
 }
