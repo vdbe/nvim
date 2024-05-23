@@ -1,7 +1,9 @@
 return {
   {
-    "tree-sitter/tree-sitter",
+    "nvim-treesitter/nvim-treesitter",
+    name = "nvim-treesitter",
     version = false,
+    dir = vim.g.nix_plugins_path,
     event = { "VeryLazy" },
     lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
     init = function(plugin)

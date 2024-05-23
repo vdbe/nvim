@@ -5,8 +5,6 @@
       or []
       ++ [
         ./patches/lazy-nvim/no-helptags.patch
-        ./patches/lazy-nvim/loader__load.patch
-        ./patches/lazy-nvim/loader_get_main.patch
       ];
   });
 

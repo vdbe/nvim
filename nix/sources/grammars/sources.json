@@ -59,6 +59,21 @@
       "revision": "7b4275d077ae196fc0ce42ab3ad091574e3ec519",
       "url": "https://api.github.com/repos/tree-sitter/tree-sitter-typescript/tarball/v0.21.1",
       "hash": "1w113zbh322i39pr3cym4n4kvs33sg004mpca5mydh1nx19w06x1"
+    },
+    "tree-sitter-vimdoc": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "neovim",
+        "repo": "tree-sitter-vimdoc"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v2.5.1",
+      "revision": "241b5e2dd7bd8eb7f7ef84f14cbfdd26d474bda3",
+      "url": "https://api.github.com/repos/neovim/tree-sitter-vimdoc/tarball/v2.5.1",
+      "hash": "0br4i6s1f43nm2j61k3i2mfdr02hwnscnwm59lnbj00pdlv69sdv"
     }
   },
   "version": 3

@@ -6,21 +6,11 @@ require("lazy").setup(
     import = "nobody.plugins",
   },
   { -- opts
-    defaults = {
-      pin = vim.g.nix_plugins_path ~= nil,
-    },
     install = {
-      missing = vim.g.nix_plugins_path == nil,
+      missing = vim.g.is_nix == false,
     },
     change_detection = {
-      notify = false,
-    },
-    performance = {
-      rtp = {
-        paths = {
-          vim.g.nix_plugins_path -- Not needed when merging plugins with `symLinkJoin`
-        },
-      },
+      notify = vim.g.is_nix == false,
     },
   }
 )

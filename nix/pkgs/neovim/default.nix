@@ -13,6 +13,8 @@
   ...
 }: let
   inherit (lib) fileset;
+  inherit (lib.strings) getName optionalString;
+  inherit (lib.lists) findFirst filter;
 
   config = pkgs.vimUtils.buildVimPlugin {
     inherit version;
@@ -31,7 +33,13 @@
     lazy-nvim
     catppuccin-nvim
     nvim-treesitter
-  ];
+  ] ++ extraPlugins;
+
+  lazyNvim = findFirst (plugin: (getName plugin) == "lazy-nvim") null plugins;
+  filteredPlugins = if lazyNvim == null then
+  plugins
+  else
+    filter (plugin: (getName plugin) != "lazy-nvim") plugins;
 
   extraPackages' =
     [
@@ -41,13 +49,20 @@
   neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
     withPython3 = true;
     withRuby = false;
-    plugins = [
-      (pkgs.symlinkJoin {
-        name = "neovim-plugins";
-        paths = [vimPlugins.nvim-treesitter.withAllGrammars] ++ plugins ++ [config] ++ extraPlugins;
-      })
-    ];
+    plugins = [config];
+    # plugins = [
+    #   (pkgs.symlinkJoin {
+    #     name = "neovim-plugins";
+    #     paths = plugins ++ [config] ++ extraPlugins;
+    #   })
+    # ];
   };
+
+  plugins' = pkgs.symlinkJoin {
+    name = "neovim-plugins";
+    paths = filteredPlugins;
+  };
+
 
   neovim-unwrapped' = neovim-unwrapped.overrideAttrs (_: previousAttrs: {
     treesitter-parsers = {};
@@ -71,8 +86,12 @@ in
         + " "
         + ''--suffix PATH : "${lib.makeBinPath extraPackages'}"'';
 
-      luaRcContent = ''
-        vim.g.nix_plugins_path = '${config}'
-        require("nobody")
+      luaRcContent = optionalString (lazyNvim != null) ''
+        vim.opt.rtp:prepend("${lazyNvim}");
+      '' + ''
+        vim.g.is_nix = true
+        vim.g.nix_plugins_path = "${plugins'}"
+
+        require("nobody");
       '';
     })
