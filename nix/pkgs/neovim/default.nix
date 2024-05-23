@@ -49,8 +49,8 @@
     ];
   };
 
-  # FIX: DOn't rebuild everything for this
   neovim-unwrapped' = neovim-unwrapped.overrideAttrs (_: previousAttrs: {
+    treesitter-parsers = {};
     preConfigure =
       previousAttrs.preConfigure
       or ""

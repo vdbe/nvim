@@ -15,6 +15,21 @@
       "url": "https://api.github.com/repos/tree-sitter/tree-sitter-c/tarball/v0.21.1",
       "hash": "0sycp85pl0yr3d35fj17p1kbz8j3xj04ql35xmmd78f9592s0862"
     },
+    "tree-sitter-query": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "tree-sitter-grammars",
+        "repo": "tree-sitter-query"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v0.3.0",
+      "revision": "d1b0b34c177d93cd17f85e964568dfdad90e05e0",
+      "url": "https://api.github.com/repos/tree-sitter-grammars/tree-sitter-query/tarball/v0.3.0",
+      "hash": "191h311g14aah7wpibpyhpz925506c3l6qyrfra1kd8pjn1nv2vk"
+    },
     "tree-sitter-rust": {
       "type": "GitRelease",
       "repository": {
