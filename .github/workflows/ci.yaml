@@ -43,6 +43,7 @@ jobs:
 
   check:
     name: Check flake
+    needs: build
     runs-on: ubuntu-latest
 
     steps:

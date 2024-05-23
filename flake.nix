@@ -53,4 +53,9 @@
 
       legacyPackages = forAllSystems (pkgs: import ./nix/pkgs { inherit pkgs; });
     };
+
+  nixConfig = {
+    extra-substituters = [ "https://vdbe.cachix.org" ];
+    extra-trusted-public-keys = [ "vdbe.cachix.org-1:ID9DIbnE6jHyJlQiwS7L7tFULJd1dsxt2ODAWE94nts=" ];
+  };
 }
