@@ -17,7 +17,7 @@ let
 in
 {
   check-headless = mkHeadlessCheck "check-headless" "";
-  check-nvim-treesitter = mkHeadlessCheck "check-headless" "test.rs +InspectTree";
+  check-treesitter-grammars = mkHeadlessCheck "check-headless" "test.rs +InspectTree";
 
   # check-health = pkgs.runCommand "check-lazy-health" {} ''
   #   mkdir -p $out{.config, .local/state, .local/share, .cache}
