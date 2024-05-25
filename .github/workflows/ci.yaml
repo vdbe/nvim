@@ -17,6 +17,8 @@ jobs:
         os: [ubuntu-latest]
         package:
           - default
+          - default.noPlugins
+          - default.minimal
 
     name: Build (${{ matrix.os }})
     runs-on: ${{ matrix.os }}

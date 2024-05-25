@@ -1,5 +1,35 @@
 {
   "pins": {
+    "AstroNvim": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "AstroNvim",
+        "repo": "AstroNvim"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v4.7.7",
+      "revision": "356a29c28714ad891f9950688d9512bc97f0f906",
+      "url": "https://api.github.com/repos/AstroNvim/AstroNvim/tarball/v4.7.7",
+      "hash": "02d6cmfcjyznngsx4fdfp9mkpk5j25pclwip9jzzrn73dq6ji0sv"
+    },
+    "astrocore": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "AstroNvim",
+        "repo": "astrocore"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v1.4.0",
+      "revision": "6ccb7e149440d72baf7c885f60a1f2ab2853903f",
+      "url": "https://api.github.com/repos/AstroNvim/astrocore/tarball/v1.4.0",
+      "hash": "17adilffw8vly5kqnsscv719mff392da1iii67jijzpws7x1znaa"
+    },
     "catppuccin.nvim": {
       "type": "GitRelease",
       "repository": {
@@ -29,6 +59,21 @@
       "revision": "8f19915175395680808de529e4220da8dafc0759",
       "url": "https://api.github.com/repos/folke/lazy.nvim/tarball/v10.20.5",
       "hash": "0abvisck8cnydm9cf89qfkr2yhmdpzc1jn180v5ar4gv7al9g2wv"
+    },
+    "nvim-lspconfig": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "neovim",
+        "repo": "nvim-lspconfig"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v0.1.8",
+      "revision": "0b8165cf95806bc4bb8f745bb0c92021b2ed4b98",
+      "url": "https://api.github.com/repos/neovim/nvim-lspconfig/tarball/v0.1.8",
+      "hash": "1xs2w7pjq0yhd9i5rc28b50h69kgf3xy1dhmd38avladkxmpp0ky"
     },
     "nvim-treesitter": {
       "type": "Git",

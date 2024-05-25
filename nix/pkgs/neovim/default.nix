@@ -1,108 +1,57 @@
 {
-  pkgs,
   lib,
-  tree-sitter,
-  runCommandNoCC,
-  neovimUtils,
+  callPackage,
   vimPlugins,
-  neovim-unwrapped,
-  extraPlugins ? [ ],
-  extraPackages ? [ ],
-  treesitter-grammars ? vimPlugins.nvim-treesitter.allGrammars,
-  extraName ? "my",
-  version ? "unkown-dirty",
   ...
 }:
 let
-  inherit (builtins) map;
   inherit (lib) fileset;
-  inherit (lib.strings) getName concatStrings;
+  inherit (lib.attrsets) recursiveUpdate;
 
-  config = pkgs.vimUtils.buildVimPlugin {
-    inherit version;
-    pname = "neovim-config-lua";
+  neovimBuilder = callPackage ./builder.nix;
 
-    src = fileset.toSource {
+  minimal = noPlugins.override {
+    treesitter-grammars = [ ];
+    withPython3 = false;
+    withNodeJs = false;
+    withRuby = false;
+  };
+
+  noPlugins = neovimBuilder {
+    nvim-src = fileset.toSource {
       root = ../../../.;
       fileset = fileset.unions [
-        ../../../lua
+        ../../../lua/common
         ../../../plugin
       ];
     };
-  };
 
-  plugins =
-    (with vimPlugins; [
+    plugins = with vimPlugins; [
       lazy-nvim
-      catppuccin-nvim
       nvim-treesitter
-    ])
-    ++ extraPlugins;
-
-  extraPackages' = [ ] ++ extraPackages;
-
-  neovimConfig = neovimUtils.makeNeovimConfig {
-    withPython3 = true;
-    withRuby = false;
-    plugins = [ config ];
-    # NOTE: can't use this method since I couldn't not find a way to get the
-    # packdir path for `lucaRcContent`
-    #
-    # ++ (map (plugin: {
-    #   inherit plugin;
-    #   optional = true;
-    # }) plugins);
+      catppuccin-nvim
+    ];
+    luaRc = "";
   };
 
-  mergedPlugins = runCommandNoCC "neovim-plugins" { } (
-    ''
-      mkdir -p $out/pack/myNeovimPackages/opt
-    ''
-    + (concatStrings (
-      map (
-        vimPlugin:
-        let
-          vimPluginName = getName vimPlugin;
-        in
-        ''
-          cp -a ${vimPlugin} $out/pack/myNeovimPackages/opt/${vimPluginName}
-        ''
-      ) plugins
-    ))
-  );
+  full = neovimBuilder {
+    nvim-src = fileset.toSource {
+      root = ../../../.;
+      fileset = fileset.unions [ ../../../lua/nobody ];
+    };
 
-  neovim-unwrapped' = neovim-unwrapped.overrideAttrs (
-    _: previousAttrs: {
-      treesitter-parsers = { };
-      preConfigure =
-        previousAttrs.preConfigure or ""
-        + (
-          let
-            grammar = tree-sitter.withPlugins (_: treesitter-grammars);
-          in
-          ''
-            mkdir -p $out/lib/nvim/parser/
-            cp -a ${grammar}/*.so $out/lib/nvim/parser/
-          ''
-        );
-    }
-  );
+    plugins = with vimPlugins; [
+      lazy-nvim
+      nvim-treesitter
+      catppuccin-nvim
+    ];
+    luaRc = ''
+      require("nobody")
+    '';
+  };
 in
-pkgs.wrapNeovimUnstable neovim-unwrapped' (
-  lib.recursiveUpdate neovimConfig {
-    inherit extraName;
-    wrapperArgs =
-      lib.escapeShellArgs neovimConfig.wrapperArgs
-      + " "
-      + ''--suffix PATH : "${lib.makeBinPath extraPackages'}"'';
-
-    luaRcContent =
-      ''
-        vim.g.is_nix = true
-        vim.g.nix_plugins_path = "${mergedPlugins}"
-
-        vim.opt.packpath:prepend("${mergedPlugins}")
-      ''
-      + builtins.readFile ../../../init.lua;
+full.overrideAttrs (
+  _: previousAttrs: {
+    passthru = recursiveUpdate previousAttrs.passthru { inherit full noPlugins minimal; };
   }
 )
