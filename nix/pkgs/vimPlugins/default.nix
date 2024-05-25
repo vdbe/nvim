@@ -21,7 +21,7 @@ let
   mkPlugins = mapAttrs (
     n: v:
     buildVimPlugin {
-      pname = n;
+      pname = v.repository.repo or n;
       version = v.version or v.revision;
       src = v;
     }

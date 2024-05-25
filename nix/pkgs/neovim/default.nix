@@ -2,7 +2,8 @@
   pkgs,
   lib,
   tree-sitter,
-  stdenv,
+  runCommandNoCC,
+  neovimUtils,
   vimPlugins,
   neovim-unwrapped,
   extraPlugins ? [ ],
@@ -13,9 +14,9 @@
   ...
 }:
 let
+  inherit (builtins) map;
   inherit (lib) fileset;
-  inherit (lib.strings) getName optionalString;
-  inherit (lib.lists) findFirst filter;
+  inherit (lib.strings) getName concatStrings;
 
   config = pkgs.vimUtils.buildVimPlugin {
     inherit version;
@@ -31,30 +32,44 @@ let
   };
 
   plugins =
-    with vimPlugins;
-    [
+    (with vimPlugins; [
       lazy-nvim
       catppuccin-nvim
       nvim-treesitter
-    ]
+    ])
     ++ extraPlugins;
-
-  lazyNvim = findFirst (plugin: (getName plugin) == "lazy-nvim") null plugins;
-  filteredPlugins =
-    if lazyNvim == null then plugins else filter (plugin: (getName plugin) != "lazy-nvim") plugins;
 
   extraPackages' = [ ] ++ extraPackages;
 
-  neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
+  neovimConfig = neovimUtils.makeNeovimConfig {
     withPython3 = true;
     withRuby = false;
     plugins = [ config ];
+    # NOTE: can't use this method since I couldn't not find a way to get the
+    # packdir path for `lucaRcContent`
+    #
+    # ++ (map (plugin: {
+    #   inherit plugin;
+    #   optional = true;
+    # }) plugins);
   };
 
-  mergedPlugins = pkgs.symlinkJoin {
-    name = "neovim-plugins";
-    paths = filteredPlugins;
-  };
+  mergedPlugins = runCommandNoCC "neovim-plugins" { } (
+    ''
+      mkdir -p $out/pack/myNeovimPackages/opt
+    ''
+    + (concatStrings (
+      map (
+        vimPlugin:
+        let
+          vimPluginName = getName vimPlugin;
+        in
+        ''
+          cp -a ${vimPlugin} $out/pack/myNeovimPackages/opt/${vimPluginName}
+        ''
+      ) plugins
+    ))
+  );
 
   neovim-unwrapped' = neovim-unwrapped.overrideAttrs (
     _: previousAttrs: {
@@ -82,14 +97,12 @@ pkgs.wrapNeovimUnstable neovim-unwrapped' (
       + ''--suffix PATH : "${lib.makeBinPath extraPackages'}"'';
 
     luaRcContent =
-      optionalString (lazyNvim != null) ''
-        vim.opt.rtp:prepend("${lazyNvim}");
       ''
-      + ''
         vim.g.is_nix = true
         vim.g.nix_plugins_path = "${mergedPlugins}"
 
-        require("nobody");
-      '';
+        vim.opt.packpath:prepend("${mergedPlugins}")
+      ''
+      + builtins.readFile ../../../init.lua;
   }
 )
