@@ -1,6 +1,8 @@
 local set = vim.keymap.set
 local Common = require("common")
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 Common.util.set_key_mappings(Common.keymaps)
 
