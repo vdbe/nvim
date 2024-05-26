@@ -1,15 +1,18 @@
 { callPackage, ... }:
 self: super: {
-  catppuccin-nvim = super.catppuccin-nvim.overrideAttrs (
-    _: _: {
-      # github:catppuccin/nvim recommends renaming plugin to catppuccin
-      pname = "catppuccin";
-    }
-  );
+  catppuccin-nvim = super.catppuccin-nvim.overrideAttrs {
+    # github:catppuccin/nvim recommends renaming plugin to catppuccin
+    pname = "catppuccin";
+  };
 
   lazy-nvim = super.lazy-nvim.overrideAttrs (
     _: previousAttrs: {
-      patches = previousAttrs.patches or [ ] ++ [ ./patches/lazy-nvim/no-helptags.patch ];
+      patches = previousAttrs.patches or [ ] ++ [
+        ./patches/lazy-nvim/no-helptags.patch
+
+        ./patches/lazy-nvim/allow-symlinked-plugins.patch
+        ./patches/lazy-nvim/add-nix-packpath.patch
+      ];
     }
   );
 

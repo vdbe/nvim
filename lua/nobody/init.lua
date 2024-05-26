@@ -17,7 +17,7 @@ if vim.g.is_nix ~= true then
   vim.opt.rtp:prepend(lazypath)
 else
   vim.cmd [[packadd lazy.nvim]]
-  plugins_root = vim.g.nix_plugins_path .. "/pack/myNeovimPackages/opt"
+  plugins_root = vim.g.nix_packpath .. "/pack/myNeovimPackages/opt"
 end
 
 require("lazy").setup(

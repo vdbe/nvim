@@ -1,0 +1,13 @@
+diff --git a/lua/lazy/core/config.lua b/lua/lazy/core/config.lua
+index 5aa61cb..ab202e1 100644
+--- a/lua/lazy/core/config.lua
++++ b/lua/lazy/core/config.lua
+@@ -229,7 +229,7 @@ function M.setup(opts)
+   vim.fn.mkdir(M.options.root, "p")
+ 
+   if M.options.performance.reset_packpath then
+-    vim.go.packpath = vim.env.VIMRUNTIME
++    vim.go.packpath = vim.env.VIMRUNTIME .. "," .. vim.g.nix_packpath
+   end
+ 
+   M.me = debug.getinfo(1, "S").source:sub(2)

@@ -1,0 +1,13 @@
+diff --git a/lua/lazy/core/plugin.lua b/lua/lazy/core/plugin.lua
+index 64c93cd..0831322 100644
+--- a/lua/lazy/core/plugin.lua
++++ b/lua/lazy/core/plugin.lua
+@@ -482,7 +482,7 @@ function M.update_state()
+   ---@type table<string,FileType>
+   local installed = {}
+   Util.ls(Config.options.root, function(_, name, type)
+-    if type == "directory" and name ~= "readme" then
++    if (type == "link" or type == "directory") and name ~= "readme" then
+       installed[name] = type
+     elseif type == "file" and name:sub(-8) == ".cloning" then
+       name = name:sub(1, -9)
