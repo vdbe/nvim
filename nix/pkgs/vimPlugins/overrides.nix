@@ -1,5 +1,10 @@
 { callPackage, ... }:
 self: super: {
+  # AstroNvim = super.AstroNvim.overrideAttrs {
+  #   # dependencies = with self; [ astrocore ];
+  #   # src = ../../../AstroNvim;
+  # };
+
   catppuccin-nvim = super.catppuccin-nvim.overrideAttrs {
     # github:catppuccin/nvim recommends renaming plugin to catppuccin
     pname = "catppuccin";

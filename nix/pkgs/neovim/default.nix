@@ -30,6 +30,45 @@ let
     luaRc = "";
   };
 
+  comet = neovimBuilder {
+    nvim-src = fileset.toSource {
+      root = ../../../.;
+      fileset = fileset.unions [
+        ../../../lua/common
+        ../../../lua/comet
+      ];
+    };
+
+    plugins = with vimPlugins; [
+      lazy-nvim
+
+      astronvim
+      astrocore
+      astrolsp
+      astroui
+      astrocommunity
+
+      nvim-lspconfig
+      neoconf-nvim
+      lspkind-nvim
+      nvim-treesitter
+      nvim-treesitter-textobjects
+
+      nvim-cmp
+      cmp-buffer
+      cmp-nvim-lsp
+      cmp-path
+      cmp_luasnip
+      friendly-snippets
+      luasnip
+
+      catppuccin-nvim
+    ];
+    luaRc = ''
+      require("comet")
+    '';
+  };
+
   full = neovimBuilder {
     nvim-src = fileset.toSource {
       root = ../../../.;
@@ -46,8 +85,15 @@ let
     '';
   };
 in
-full.overrideAttrs (
+comet.overrideAttrs (
   _: previousAttrs: {
-    passthru = recursiveUpdate previousAttrs.passthru { inherit full noPlugins minimal; };
+    passthru = recursiveUpdate previousAttrs.passthru {
+      inherit
+        full
+        comet
+        noPlugins
+        minimal
+        ;
+    };
   }
 )

@@ -10,8 +10,9 @@ let
   inherit (builtins) mapAttrs replaceStrings;
   inherit (lib.attrsets) mapAttrs';
   inherit (lib.fixedPoints) extends;
+  inherit (lib.strings) toLower;
 
-  renamePlugin = name: replaceStrings [ "." ] [ "-" ] name;
+  renamePlugin = name: replaceStrings [ "." ] [ "-" ] (toLower name);
 
   pluginSources = mapAttrs' (n: v: {
     name = renamePlugin n;
