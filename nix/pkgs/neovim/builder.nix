@@ -3,6 +3,7 @@
   lib,
   tree-sitter,
   runCommandNoCC,
+  vimUtils,
   neovimUtils,
   vimPlugins,
   neovim-unwrapped,
@@ -27,12 +28,22 @@ let
   inherit (builtins) map length;
   inherit (lib.strings) getName concatStrings optionalString;
 
-  config = pkgs.vimUtils.buildVimPlugin {
+  config = vimUtils.buildVimPlugin {
     inherit version;
     pname = "neovim-config-lua${extraName}";
 
     src = nvim-src;
   };
+
+  parsers = runCommandNoCC "parsers" { } (
+    let
+      grammars = tree-sitter.withPlugins (_: treesitter-grammars);
+    in
+    ''
+      mkdir -p $out/parser/
+      cp -a ${grammars}/*.so $out/parser/
+    ''
+  );
 
   plugins' = plugins ++ extraPlugins;
 
@@ -40,7 +51,10 @@ let
 
   neovimConfig = neovimUtils.makeNeovimConfig {
     inherit withPython3 withNodeJs withRuby;
-    plugins = [ config ];
+    plugins = [
+      config
+      parsers
+    ];
     # NOTE: can't use this method since I couldn't not find a way to get the
     # packdir path for `lucaRcContent`
     #
@@ -67,22 +81,7 @@ let
     ))
   );
 
-  neovim-unwrapped' = neovim-unwrapped.overrideAttrs (
-    _: previousAttrs: {
-      treesitter-parsers = { };
-      preConfigure =
-        previousAttrs.preConfigure or ""
-        + optionalString ((length treesitter-grammars) != 0) (
-          let
-            grammar = tree-sitter.withPlugins (_: treesitter-grammars);
-          in
-          ''
-            mkdir -p $out/lib/nvim/parser/
-            cp -a ${grammar}/*.so $out/lib/nvim/parser/
-          ''
-        );
-    }
-  );
+  neovim-unwrapped' = neovim-unwrapped.overrideAttrs { treesitter-parsers = { }; };
 in
 pkgs.wrapNeovimUnstable neovim-unwrapped' (
   lib.recursiveUpdate neovimConfig {

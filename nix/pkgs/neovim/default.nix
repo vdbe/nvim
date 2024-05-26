@@ -26,11 +26,7 @@ let
       ];
     };
 
-    plugins = with vimPlugins; [
-      lazy-nvim
-      nvim-treesitter
-      catppuccin-nvim
-    ];
+    plugins = [ ];
     luaRc = "";
   };
 

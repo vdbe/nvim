@@ -30,4 +30,14 @@ function M.set_key_mappings(map_table, base)
   end
 end
 
+--- Table based API for settings options
+--@param option_table table<string,table<string,any>>?
+function M.set_options(options)
+  for scope, settings in pairs(options) do
+    for setting, value in pairs(settings) do
+      vim[scope][setting] = value
+    end
+  end
+end
+
 return M
