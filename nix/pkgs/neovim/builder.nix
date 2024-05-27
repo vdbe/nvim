@@ -9,6 +9,8 @@
   withPython3 ? true,
   withNodeJs ? false,
   withRuby ? false,
+  vimAlias ? false,
+  viAlias ? false,
   nvim-src ? import ./nvim-src.nix { inherit lib; },
   treesitter-grammars ? vimPlugins.nvim-treesitter.allGrammars,
   extraName ? "my",
@@ -48,7 +50,13 @@ let
   packages' = extraPackages ++ extraExtraPackages;
 
   neovimConfig = neovimUtils.makeNeovimConfig {
-    inherit withPython3 withNodeJs withRuby;
+    inherit
+      withPython3
+      withNodeJs
+      withRuby
+      vimAlias
+      viAlias
+      ;
     plugins =
       [ config ]
       ++ optional (treesitter-grammars != [ ]) parsers
