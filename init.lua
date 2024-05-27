@@ -1,1 +1,1 @@
-require("comet")
+require "comet"

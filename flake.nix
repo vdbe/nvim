@@ -30,6 +30,11 @@
             ++ (with pkgs; [
               npins
 
+              # lua
+              lua-language-server
+              stylua
+              selene
+
               # nix
               deadnix
               nixd

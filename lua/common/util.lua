@@ -4,8 +4,6 @@ local M = {}
 ---@param map_table AstroCoreMappings A nested table where the first key is the vim mode, the second key is the key to map, and the value is the function to set the mapping to
 ---@param base? vim.api.keyset.keymap A base set of options to set on every keybinding
 function M.set_key_mappings(map_table, base)
-  vim.print("test")
-
   -- iterate over the first keys for each mode
   for mode, maps in pairs(map_table) do
     -- iterate over each keybinding set in the current mode

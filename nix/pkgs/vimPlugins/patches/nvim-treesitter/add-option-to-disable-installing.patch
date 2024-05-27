@@ -1,0 +1,72 @@
+diff --git a/README.md b/README.md
+index 6887b6f7..95513729 100644
+--- a/README.md
++++ b/README.md
+@@ -108,6 +108,9 @@ require'nvim-treesitter.configs'.setup {
+   -- A list of parser names, or "all" (the five listed parsers should always be installed)
+   ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+ 
++  -- If `false` disables all installs
++  false = true,
++
+   -- Install parsers synchronously (only applied to `ensure_installed`)
+   sync_install = false,
+ 
+diff --git a/doc/nvim-treesitter.txt b/doc/nvim-treesitter.txt
+index f7a91b84..b8395f2f 100644
+--- a/doc/nvim-treesitter.txt
++++ b/doc/nvim-treesitter.txt
+@@ -48,6 +48,9 @@ To enable supported features, put this in your `init.lua` file:
+     -- A list of parser names, or "all"
+     ensure_installed = { "c", "lua", "rust" },
+ 
++    -- If `false` disables all installs
++    false = true,
++
+     -- Install parsers synchronously (only applied to `ensure_installed`)
+     sync_install = false,
+ 
+diff --git a/lua/nvim-treesitter/configs.lua b/lua/nvim-treesitter/configs.lua
+index a3ec30fb..ccbbbc17 100644
+--- a/lua/nvim-treesitter/configs.lua
++++ b/lua/nvim-treesitter/configs.lua
+@@ -20,6 +20,7 @@ local M = {}
+ local config = {
+   modules = {},
+   sync_install = false,
++  install = false,
+   ensure_installed = {},
+   auto_install = false,
+   ignore_install = {},
+@@ -409,6 +410,7 @@ end
+ ---@param user_data TSConfig module overrides
+ function M.setup(user_data)
+   config.modules = vim.tbl_deep_extend("force", config.modules, user_data)
++  config.install = user_data.install or true
+   config.ignore_install = user_data.ignore_install or {}
+   config.parser_install_dir = user_data.parser_install_dir or nil
+   if config.parser_install_dir then
+@@ -420,7 +422,8 @@ function M.setup(user_data)
+     require("nvim-treesitter.install").setup_auto_install()
+   end
+ 
+-  local ensure_installed = user_data.ensure_installed or {}
++  local ensure_installed = user_data.install == false and {} or user_data.ensure_installed or {}
++  require("nvim-treesitter.install").install = config.install
+   if #ensure_installed > 0 then
+     if user_data.sync_install then
+       require("nvim-treesitter.install").ensure_installed_sync(ensure_installed)
+diff --git a/lua/nvim-treesitter/install.lua b/lua/nvim-treesitter/install.lua
+index ec7d6245..ceb930d7 100644
+--- a/lua/nvim-treesitter/install.lua
++++ b/lua/nvim-treesitter/install.lua
+@@ -505,6 +505,9 @@ end
+ ---@param options? InstallOptions
+ ---@return function
+ local function install(options)
++  if not M.install then
++    return function(...) end
++  end
+   options = options or {}
+   local with_sync = options.with_sync
+   local ask_reinstall = options.ask_reinstall

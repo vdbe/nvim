@@ -15,6 +15,8 @@
   version ? "unkown-dirty",
   plugins ? [ ],
   extraPackages ? [ ],
+  lspPackages ? [ ],
+  extraLspPackages ? [ ],
   luaRc ? builtins.readFile ../../../init.lua,
   # Extras
   extraPlugins ? [ ],
@@ -24,6 +26,7 @@
 let
   inherit (builtins) map;
   inherit (lib.lists) optional optionals;
+  inherit (lib.attrsets) recursiveUpdate;
 
   config = vimUtils.buildVimPlugin {
     inherit version;
@@ -67,29 +70,43 @@ let
   packpath = vimUtils.packDir packpathDirs;
 
   neovim-unwrapped' = neovim-unwrapped.overrideAttrs { treesitter-parsers = { }; };
-in
-pkgs.wrapNeovimUnstable neovim-unwrapped' (
-  lib.recursiveUpdate neovimConfig' {
-    inherit extraName;
-    wrapperArgs = lib.escapeShellArgs (
-      neovimConfig.wrapperArgs
-      ++ (optionals
-        (packpathDirs.myNeovimPackages.start != [ ] || packpathDirs.myNeovimPackages.opt != [ ])
-        [
-          "--add-flags"
-          ''--cmd "set packpath^=${packpath}"''
-          "--add-flags"
-          ''--cmd "set rtp^=${packpath}"''
-        ]
-      )
-      ++ optional (packages' != [ ]) ''--suffix PATH : "${lib.makeBinPath packages'}"''
+
+  mkMynvim =
+    packages'':
+    pkgs.wrapNeovimUnstable neovim-unwrapped' (
+      lib.recursiveUpdate neovimConfig' {
+        inherit extraName;
+        wrapperArgs = lib.escapeShellArgs (
+          neovimConfig.wrapperArgs
+          ++ (
+            optionals (packpathDirs.myNeovimPackages.start != [ ] || packpathDirs.myNeovimPackages.opt != [ ]) [
+              "--add-flags"
+              ''--cmd "set packpath^=${packpath}"''
+              "--add-flags"
+              ''--cmd "set rtp^=${packpath}"''
+            ]
+            ++ optionals (packages'' != [ ]) [
+              "--suffix"
+              "PATH"
+              ":"
+              "${lib.makeBinPath packages''}"
+            ]
+
+          )
+        );
+
+        luaRcContent =
+          ''
+            vim.g.is_nix = true
+            vim.g.nix_packpath = "${packpath}"
+          ''
+          + luaRc;
+      }
     );
 
-    luaRcContent =
-      ''
-        vim.g.is_nix = true
-        vim.g.nix_packpath = "${packpath}"
-      ''
-      + luaRc;
-  }
+  mynvim = mkMynvim packages';
+  withLsp = mkMynvim (packages' ++ lspPackages ++ extraLspPackages);
+in
+mynvim.overrideAttrs (
+  _: previousAttrs: { passthru = recursiveUpdate previousAttrs.passthru { inherit withLsp; }; }
 )

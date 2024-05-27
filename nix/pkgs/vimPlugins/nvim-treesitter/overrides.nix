@@ -54,6 +54,10 @@ in
     rm -r parser
   '';
 
+  patches = super.patches or [ ] ++ [
+    ../patches/nvim-treesitter/add-option-to-disable-installing.patch
+  ];
+
   passthru = (super.nvim-treesitter.passthru or { }) // {
     inherit
       builtGrammars

@@ -1,15 +1,34 @@
-local Common = require("common")
+local Common = require "common"
 
 return {
   {
     "AstroNvim/astrocore",
     lazy = false, -- disable lazy loading
     priority = 10000, -- load AstroCore first
-    ---@param opts AstroCoreOpts
-    opts = function(_, opts) 
+    opts = function(_, opts)
+      local get_icon = require("astroui").get_icon
       opts = {
-        diagnostics= {
+        diagnostics = {
+          virtual_text = true,
+          signs = {
+            text = {
+              [vim.diagnostic.severity.ERROR] = get_icon "DiagnosticError",
+              [vim.diagnostic.severity.HINT] = get_icon "DiagnosticHint",
+              [vim.diagnostic.severity.WARN] = get_icon "DiagnosticWarn",
+              [vim.diagnostic.severity.INFO] = get_icon "DiagnosticInfo",
+            },
+          },
           update_in_insert = true,
+          underline = true,
+          severity_sort = true,
+          float = {
+            focused = false,
+            style = "minimal",
+            border = "rounded",
+            source = "always",
+            header = "",
+            prefix = "",
+          },
         },
         options = Common.options,
         features = {
@@ -46,7 +65,6 @@ return {
         },
       }
 
-      local get_icon = require("astroui").get_icon
       -- initialize internally use mapping section titles
       opts._map_sections = {
         f = { desc = get_icon("Search", 1, true) .. "Find" },
@@ -60,7 +78,7 @@ return {
         t = { desc = get_icon("Terminal", 1, true) .. "Terminal" },
       }
 
-      local maps = Common.keymaps;
+      local maps = Common.keymaps
       local sections = opts._map_sections
 
       -- Manage Buffers
@@ -85,25 +103,25 @@ return {
 
       maps.n["<Leader>b"] = vim.tbl_get(sections, "b")
       maps.n["<Leader>bc"] =
-      { function() require("astrocore.buffer").close_all(true) end, desc = "Close all buffers except current" }
+        { function() require("astrocore.buffer").close_all(true) end, desc = "Close all buffers except current" }
       maps.n["<Leader>bC"] = { function() require("astrocore.buffer").close_all() end, desc = "Close all buffers" }
       maps.n["<Leader>bl"] =
-      { function() require("astrocore.buffer").close_left() end, desc = "Close all buffers to the left" }
+        { function() require("astrocore.buffer").close_left() end, desc = "Close all buffers to the left" }
       maps.n["<Leader>bp"] = { function() require("astrocore.buffer").prev() end, desc = "Previous buffer" }
       maps.n["<Leader>br"] =
-      { function() require("astrocore.buffer").close_right() end, desc = "Close all buffers to the right" }
+        { function() require("astrocore.buffer").close_right() end, desc = "Close all buffers to the right" }
       maps.n["<Leader>bs"] = vim.tbl_get(sections, "bs")
       maps.n["<Leader>bse"] = { function() require("astrocore.buffer").sort "extension" end, desc = "By extension" }
-      maps.n["<Leader>bsr"] = { function() require("astrocore.buffer").sort "unique_path" end, desc = "By relative path" }
+      maps.n["<Leader>bsr"] =
+        { function() require("astrocore.buffer").sort "unique_path" end, desc = "By relative path" }
       maps.n["<Leader>bsp"] = { function() require("astrocore.buffer").sort "full_path" end, desc = "By full path" }
       maps.n["<Leader>bsi"] = { function() require("astrocore.buffer").sort "bufnr" end, desc = "By buffer number" }
       maps.n["<Leader>bsm"] = { function() require("astrocore.buffer").sort "modified" end, desc = "By modification" }
 
-
-
       maps.n["<Leader>u"] = vim.tbl_get(sections, "u")
       -- Custom menu for modification of the user experience
-      maps.n["<Leader>uA"] = { function() require("astrocore.toggles").autochdir() end, desc = "Toggle rooter autochdir" }
+      maps.n["<Leader>uA"] =
+        { function() require("astrocore.toggles").autochdir() end, desc = "Toggle rooter autochdir" }
       maps.n["<Leader>ub"] = { function() require("astrocore.toggles").background() end, desc = "Toggle background" }
       maps.n["<Leader>ud"] = { function() require("astrocore.toggles").diagnostics() end, desc = "Toggle diagnostics" }
       maps.n["<Leader>ug"] = { function() require("astrocore.toggles").signcolumn() end, desc = "Toggle signcolumn" }
@@ -112,7 +130,7 @@ return {
       maps.n["<Leader>ul"] = { function() require("astrocore.toggles").statusline() end, desc = "Toggle statusline" }
       maps.n["<Leader>un"] = { function() require("astrocore.toggles").number() end, desc = "Change line numbering" }
       maps.n["<Leader>uN"] =
-      { function() require("astrocore.toggles").notifications() end, desc = "Toggle Notifications" }
+        { function() require("astrocore.toggles").notifications() end, desc = "Toggle Notifications" }
       maps.n["<Leader>up"] = { function() require("astrocore.toggles").paste() end, desc = "Toggle paste mode" }
       maps.n["<Leader>us"] = { function() require("astrocore.toggles").spell() end, desc = "Toggle spellcheck" }
       maps.n["<Leader>uS"] = { function() require("astrocore.toggles").conceal() end, desc = "Toggle conceal" }
@@ -120,24 +138,26 @@ return {
       maps.n["<Leader>uu"] = { function() require("astrocore.toggles").url_match() end, desc = "Toggle URL highlight" }
       maps.n["<Leader>uw"] = { function() require("astrocore.toggles").wrap() end, desc = "Toggle wrap" }
       maps.n["<Leader>uy"] =
-      { function() require("astrocore.toggles").buffer_syntax() end, desc = "Toggle syntax highlight" }
+        { function() require("astrocore.toggles").buffer_syntax() end, desc = "Toggle syntax highlight" }
 
       opts.mappings = maps
       return opts
     end,
-    config = function(_, opts) 
-      require("astrocore").setup(opts)
-    end
+    dependencies = {
+      {
+        "AstroNvim/AstroNvim",
+        lazy = true, -- disable lazy loading
+        priority = 10000, -- load AstroCore first
+        module = true,
+        config = false,
+      },
+    },
   },
-  {
-    "AstroNvim/AstroNvim",
-    module = true,
-    config = false,
-  },
+  { import = "astronvim.plugins._astrocore_autocmds" },
   {
     "AstroNvim/astrocommunity",
     lazy = false,
-    -- module = true,
+    module = true,
     config = false,
   },
 }

@@ -1,3 +1,3 @@
-local Common = require("common")
+local Common = require "common"
 
 Common.util.set_options(Common.options)

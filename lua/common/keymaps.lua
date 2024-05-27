@@ -3,9 +3,7 @@ local M = {}
 local diagnostic_goto = function(next, severity)
   local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
   severity = severity and vim.diagnostic.severity[severity] or nil
-  return function()
-    go({ severity = severity })
-  end
+  return function() go { severity = severity } end
 end
 
 M.n = {
@@ -27,33 +25,32 @@ M.n = {
   ["<leader>ws"] = { "<C-W>s", desc = "Split Window below", remap = true },
   ["<leader>wv"] = { "<C-W>v", desc = "Split Window right", remap = true },
 
-  ["<leader>y"] = { "<leader>y", desc = '"+y', desc = "copy to clipboard" },
+  ["<leader>y"] = { "+y", desc = "copy to clipboard" },
 
-  j = {"v:count == 0 ? 'gj' : 'j'",  expr = true, silent = true },
-  k = {"v:count == 0 ? 'gk' : 'k'",  expr = true, silent = true },
+  j = { "v:count == 0 ? 'gj' : 'j'", expr = true, silent = true },
+  k = { "v:count == 0 ? 'gk' : 'k'", expr = true, silent = true },
 
-  ["<leader>cd"]  = { vim.diagnostic.open_float, desc = "Line Diagnostics" },
-  ["]e"] = { diagnostic_goto(true, "ERROR"),  desc = "Next Error" },
+  ["<leader>cd"] = { vim.diagnostic.open_float, desc = "Line Diagnostics" },
+  ["]e"] = { diagnostic_goto(true, "ERROR"), desc = "Next Error" },
   ["[e"] = { diagnostic_goto(false, "ERROR"), desc = "Prev Error" },
-  ["]w"] = { diagnostic_goto(true, "WARN"),  desc = "Next Warning" },
-  ["[w"] = { diagnostic_goto(false, "WARN"),  desc = "Prev Warning" },
+  ["]w"] = { diagnostic_goto(true, "WARN"), desc = "Next Warning" },
+  ["[w"] = { diagnostic_goto(false, "WARN"), desc = "Prev Warning" },
 
-  ["<leader><tab>l"] = { "<cmd>tablast<cr>",  desc = "Last Tab" },
-  ["<leader><tab>f"] = { "<cmd>tabfirst<cr>",  desc = "First Tab" },
-  ["<leader><tab><tab>"] = { "<cmd>tabnew<cr>",  desc = "New Tab" },
-  ["<leader><tab>]"] = { "<cmd>tabnext<cr>",  desc = "Next Tab" },
-  ["<leader><tab>d"] = { "<cmd>tabclose<cr>",  desc = "Close Tab" },
-  ["<leader><tab>["] = { "<cmd>tabprevious<cr>",  desc = "Previous Tab" },
-  ["[w"] = { diagnostic_goto(false, "WARN"),  desc = "Prev Warning" },
+  ["<leader><tab>l"] = { "<cmd>tablast<cr>", desc = "Last Tab" },
+  ["<leader><tab>f"] = { "<cmd>tabfirst<cr>", desc = "First Tab" },
+  ["<leader><tab><tab>"] = { "<cmd>tabnew<cr>", desc = "New Tab" },
+  ["<leader><tab>]"] = { "<cmd>tabnext<cr>", desc = "Next Tab" },
+  ["<leader><tab>d"] = { "<cmd>tabclose<cr>", desc = "Close Tab" },
+  ["<leader><tab>["] = { "<cmd>tabprevious<cr>", desc = "Previous Tab" },
 }
 
 M.v = {
-  ["<leader>y"] = { "<leader>y", desc = '"+y', desc = "copy to clipboard" },
+  ["<leader>y"] = { "+y", desc = "copy to clipboard" },
 }
 
 M.x = {
-  j = { "v:count == 0 ? 'gj' : 'j'",  expr = true, silent = true },
-  k = { "v:count == 0 ? 'gk' : 'k'",  expr = true, silent = true },
+  j = { "v:count == 0 ? 'gj' : 'j'", expr = true, silent = true },
+  k = { "v:count == 0 ? 'gk' : 'k'", expr = true, silent = true },
 }
 
 return M

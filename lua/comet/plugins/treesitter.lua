@@ -1,9 +1,10 @@
 return {
-  { import = "astronvim.plugins.treesitter" },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
-      auto_install = vim.g.is_nix,
+      install = not vim.g.is_nix,
+      auto_install = not vim.g.is_nix,
     },
   },
+  { import = "astronvim.plugins.treesitter" },
 }

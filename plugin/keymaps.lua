@@ -1,5 +1,5 @@
 local set = vim.keymap.set
-local Common = require("common")
+local Common = require "common"
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","

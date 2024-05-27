@@ -3,7 +3,6 @@ return {
     "AstroNvim/astroui",
     lazy = false, -- disable lazy loading
     priority = 10000, -- load AstroUI first
-    ---@type AstroUIOpts
     opts = {
       colorscheme = "catppuccin",
       icons = {

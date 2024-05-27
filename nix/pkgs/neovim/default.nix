@@ -1,4 +1,5 @@
 {
+  pkgs,
   lib,
   callPackage,
   vimPlugins,
@@ -39,6 +40,13 @@ let
       ];
     };
 
+    lspPackages = with pkgs; [
+      # lua
+      lua-language-server
+      stylua
+      selene
+    ];
+
     plugins = with vimPlugins; [
       lazy-nvim
 
@@ -53,6 +61,9 @@ let
       lspkind-nvim
       nvim-treesitter
       nvim-treesitter-textobjects
+      none-ls-nvim
+      neodev-nvim
+      conform-nvim
 
       nvim-cmp
       cmp-buffer
@@ -62,17 +73,29 @@ let
       friendly-snippets
       luasnip
 
+      nvim-dap
+      cmp-dap
+      nvim-dap-ui
+      nvim-nio
+
+      plenary-nvim
       catppuccin-nvim
+      telescope-nvim
+      telescope-fzf-native-nvim
+      which-key-nvim
+      heirline-nvim
+      nvim-autopairs
+      gitsigns-nvim
     ];
     luaRc = ''
       require("comet")
     '';
   };
 
-  full = neovimBuilder {
+  example = neovimBuilder {
     nvim-src = fileset.toSource {
       root = ../../../.;
-      fileset = fileset.unions [ ../../../lua/nobody ];
+      fileset = fileset.unions [ ../../../lua/example ];
     };
 
     plugins = with vimPlugins; [
@@ -89,7 +112,7 @@ comet.overrideAttrs (
   _: previousAttrs: {
     passthru = recursiveUpdate previousAttrs.passthru {
       inherit
-        full
+        example
         comet
         noPlugins
         minimal
