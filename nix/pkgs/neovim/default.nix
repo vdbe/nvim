@@ -41,6 +41,12 @@ let
     };
 
     lspPackages = with pkgs; [
+      # nix
+      nixd
+      nixfmt-rfc-style
+      deadnix
+      statix
+
       # lua
       lua-language-server
       stylua

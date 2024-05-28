@@ -3,6 +3,7 @@ return {
   { import = "astronvim.plugins.lspkind" },
   { import = "astronvim.plugins.cmp_luasnip" },
   { import = "astronvim.plugins.mason" },
+  { import = "astrocommunity.utility.mason-tool-installer-nvim" },
   vim.g.is_nix and {
     "AstroNvim/astrolsp",
     optional = true,
