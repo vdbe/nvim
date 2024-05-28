@@ -14,7 +14,7 @@
   nvim-src ? import ./nvim-src.nix { inherit lib; },
   treesitter-grammars ? vimPlugins.nvim-treesitter.allGrammars,
   extraName ? "my",
-  version ? "unkown-dirty",
+  version ? "unknown-dirty",
   plugins ? [ ],
   extraPackages ? [ ],
   lspPackages ? [ ],

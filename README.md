@@ -11,7 +11,7 @@ Available packages are
 * `default`/`neovim`: comet
   * `comet`: IDE
   * `noPlugins`: Without plugins
-  * `minimal`: Everyting stripped out
+  * `minimal`: Everything stripped out
 
 Each variant also has a `withLsp` passthru that adds LSPs/formatter/...
 

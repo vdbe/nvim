@@ -18,7 +18,7 @@ let
       build =
         name: grammar:
         buildGrammar {
-          language = grammar.laguage or name;
+          language = grammar.language or name;
           version = grammar.version or grammar.revision;
           src = grammar;
           location = grammar.location or null;

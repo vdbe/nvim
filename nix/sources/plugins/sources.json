@@ -10,10 +10,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "v4.7.7",
-      "revision": "356a29c28714ad891f9950688d9512bc97f0f906",
-      "url": "https://api.github.com/repos/AstroNvim/AstroNvim/tarball/v4.7.7",
-      "hash": "02d6cmfcjyznngsx4fdfp9mkpk5j25pclwip9jzzrn73dq6ji0sv"
+      "version": "v4.7.9",
+      "revision": "2aa86875bdfe088d2951befdd253f9e553868c6d",
+      "url": "https://api.github.com/repos/AstroNvim/AstroNvim/tarball/v4.7.9",
+      "hash": "173jxmqh5v9zx13la85qri91jrdwksmjc9f4fnv8vb85cn431x3g"
     },
     "LuaSnip": {
       "type": "GitRelease",
@@ -188,9 +188,9 @@
         "repo": "friendly-snippets"
       },
       "branch": "main",
-      "revision": "dd2fd1281d4b22e7b4a5bfafa3e142d958e251f2",
-      "url": "https://github.com/rafamadriz/friendly-snippets/archive/dd2fd1281d4b22e7b4a5bfafa3e142d958e251f2.tar.gz",
-      "hash": "06w5m39zbkbqr85cj32dn44n11z4yji4k9iij722fci9cp66g2wl"
+      "revision": "d0610077b6129cf9f7f78afbe3a1425d60f6e2f1",
+      "url": "https://github.com/rafamadriz/friendly-snippets/archive/d0610077b6129cf9f7f78afbe3a1425d60f6e2f1.tar.gz",
+      "hash": "0vdyrbpcivc07g5invcs8mh8wq9fxhb1kp8c2flj8gnlmg83bd1h"
     },
     "gitsigns.nvim": {
       "type": "GitRelease",
@@ -383,9 +383,9 @@
         "repo": "nvim-treesitter"
       },
       "branch": "master",
-      "revision": "aa02427dfeaead86fae038024ae7b29299f08b8c",
-      "url": "https://github.com/nvim-treesitter/nvim-treesitter/archive/aa02427dfeaead86fae038024ae7b29299f08b8c.tar.gz",
-      "hash": "0f6mxl0fza8nibvnfyjb3xsyl4zd9pqw524nlhnjr3f9f47l5s87"
+      "revision": "ea2b137f35fb1e87a6471ec311805920fdf45745",
+      "url": "https://github.com/nvim-treesitter/nvim-treesitter/archive/ea2b137f35fb1e87a6471ec311805920fdf45745.tar.gz",
+      "hash": "0vrsjlzxb092ivvk8wiffci84880mh8lnhycgzld2xkxy615nyc1"
     },
     "nvim-treesitter-textobjects": {
       "type": "Git",

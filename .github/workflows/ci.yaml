@@ -17,7 +17,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest]
+        os: 
+          - ubuntu-latest
         package:
           - default
 
@@ -96,3 +97,7 @@ jobs:
       - name: Run check
         run: |
           nix flake check --print-build-logs --show-trace
+          nix build \
+            --print-build-logs \
+            --show-trace \
+            "./dev#checks.x86_64-linux.treefmt"
