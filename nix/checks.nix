@@ -1,23 +1,47 @@
 { self, pkgs }:
 let
   inherit (pkgs) lib;
-  nvim = self.packages.${pkgs.system}.default;
+
+  packages = self.packages.${pkgs.system};
 
   mkHeadlessCheck =
-    name: args:
-    pkgs.runCommand name { } ''
+    name: drvArgs: nvimArgs:
+    pkgs.runCommand name drvArgs ''
       export HOME="$(mktemp -d)"
-      ${lib.getExe nvim} --headless ${args} +qa 2>$out
+      nvim --headless ${nvimArgs} +qa 2>$out
 
       cat $out
       test -s $out && exit 1
 
       exit 0
     '';
+
+  variants = [
+    "default"
+    "default.noPlugins"
+    "default.minimal"
+  ];
+
+  headless-checks = builtins.listToAttrs (
+    map (
+      variant:
+      let
+        name = "check-headles#${variant}";
+        explodedVariant = pkgs.lib.splitString "." variant;
+        variantDrv = lib.attrByPath explodedVariant (throw "unknown variant") packages;
+      in
+      {
+        inherit name;
+        value = mkHeadlessCheck name { buildInputs = [ variantDrv ]; } "";
+      }
+    ) variants
+  );
 in
-{
-  check-headless = mkHeadlessCheck "check-headless" "";
-  check-treesitter-grammars = mkHeadlessCheck "check-headless" "test.rs +InspectTree";
+headless-checks
+// {
+  check-treesitter-grammars = mkHeadlessCheck "check-headless" {
+    buildInputs = [ packages.neovim ];
+  } "test.rs +InspectTree";
 
   # check-health = pkgs.runCommand "check-lazy-health" {} ''
   #   mkdir -p $out{.config, .local/state, .local/share, .cache}

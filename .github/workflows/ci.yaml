@@ -42,39 +42,6 @@ jobs:
         run: |
           nix build --print-build-logs .#${{ matrix.package }}
 
-  build-variations:
-    name: Build .#${{ matrix.package }} (${{ matrix.os }})
-    runs-on: ${{ matrix.os }}
-    needs: build
-
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest]
-        package:
-          - default.minimal
-          - default.noPlugins
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v11
-
-      - name: Setup cache
-        uses: DeterminateSystems/magic-nix-cache-action@v6
-
-      - name: Setup cachix
-        uses: cachix/cachix-action@v14
-        with:
-          name: vdbe
-          signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
-          authToken: "${{ secrets.CACHIX_TOKEN }}"
-
-      - name: Run build
-        run: |
-          nix build --print-build-logs .#${{ matrix.package }}
-
   check:
     name: Check flake
     needs: build
@@ -93,6 +60,8 @@ jobs:
         uses: cachix/cachix-action@v14
         with:
           name: vdbe
+          signingKey: "${{ secrets.CACHIX_SIGNING_KEY }}"
+          authToken: "${{ secrets.CACHIX_TOKEN }}"
 
       - name: Run check
         run: |
