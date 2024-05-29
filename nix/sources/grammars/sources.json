@@ -45,6 +45,18 @@
       "url": "https://api.github.com/repos/tree-sitter-grammars/tree-sitter-luap/tarball/v1.0.1",
       "hash": "1wfsfh44jn7m9kx0lfsbrf0hqavad142wl2pffab3mvpmrnawva9"
     },
+    "tree-sitter-nix": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "tree-sitter-nix"
+      },
+      "branch": "master",
+      "revision": "b3cda619248e7dd0f216088bd152f59ce0bbe488",
+      "url": "https://github.com/nix-community/tree-sitter-nix/archive/b3cda619248e7dd0f216088bd152f59ce0bbe488.tar.gz",
+      "hash": "1xh75z11d1b514qm997br8vmxalir2ah1pk7v3k1ppm28043ggr1"
+    },
     "tree-sitter-query": {
       "type": "GitRelease",
       "repository": {
