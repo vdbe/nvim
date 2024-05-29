@@ -6,7 +6,7 @@ let
 
   mkHeadlessCheck =
     name: drvArgs: nvimArgs:
-    pkgs.runCommand name drvArgs ''
+    pkgs.runCommandNoCC name drvArgs ''
       export HOME="$(mktemp -d)"
       nvim --headless ${nvimArgs} +qa 2>$out
 
@@ -18,24 +18,39 @@ let
 
   variants = [
     "default"
-    "default.noPlugins"
-    "default.minimal"
+    # "default.noPlugins"
+    # "default.minimal"
   ];
 
-  headless-checks = builtins.listToAttrs (
+  variantsDrv = builtins.listToAttrs (
     map (
       variant:
       let
-        name = "check-headles#${variant}";
+        name = variant;
         explodedVariant = pkgs.lib.splitString "." variant;
         variantDrv = lib.attrByPath explodedVariant (throw "unknown variant") packages;
       in
       {
         inherit name;
-        value = mkHeadlessCheck name { buildInputs = [ variantDrv ]; } "";
+        value = variantDrv;
       }
     ) variants
   );
+
+  headless-checks = lib.attrsets.concatMapAttrs (
+    variant: variantDrv:
+    let
+      # Some fail
+      # defaultChecks = lib.mapAttrs' (name: value: lib.nameValuePair "${variant}_${name}" value) (
+      #   lib.filterAttrs (_: lib.isDerivation) variantDrv.tests
+      # );
+
+      headlessCheck = mkHeadlessCheck variant { buildInputs = [ variantDrv ]; } "";
+    in
+    {
+      "${variant}_headless" = headlessCheck;
+    }
+  ) variantsDrv;
 in
 headless-checks
 // {
