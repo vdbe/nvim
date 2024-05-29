@@ -40,18 +40,20 @@ let
       ];
     };
 
-    lspPackages = with pkgs; [
-      # nix
-      nixd
-      nixfmt-rfc-style
-      deadnix
-      statix
+    lspPackages = with pkgs; {
+      nix = [
+        nixd
+        nixfmt-rfc-style
+        deadnix
+        statix
+      ];
 
-      # lua
-      lua-language-server
-      stylua
-      selene
-    ];
+      lua = [
+        lua-language-server
+        stylua
+        selene
+      ];
+    };
 
     plugins = with vimPlugins; [
       lazy-nvim

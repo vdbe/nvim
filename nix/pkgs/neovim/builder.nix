@@ -17,8 +17,8 @@
   version ? "unknown-dirty",
   plugins ? [ ],
   extraPackages ? [ ],
-  lspPackages ? [ ],
-  extraLspPackages ? [ ],
+  lspPackages ? { },
+  extraLspPackages ? { },
   luaRc ? builtins.readFile ../../../init.lua,
   # Extras
   extraPlugins ? [ ],
@@ -26,8 +26,19 @@
   ...
 }:
 let
-  inherit (builtins) map;
-  inherit (lib.lists) optional optionals;
+  inherit (builtins)
+    map
+    mapAttrs
+    attrNames
+    attrValues
+    listToAttrs
+    ;
+  inherit (lib.lists)
+    optional
+    optionals
+    unique
+    flatten
+    ;
   inherit (lib.attrsets) recursiveUpdate;
 
   config = vimUtils.buildVimPlugin {
@@ -48,6 +59,21 @@ let
 
   plugins' = plugins ++ extraPlugins;
   packages' = extraPackages ++ extraExtraPackages;
+
+  lspPackages' =
+    let
+      languages = unique ((attrNames lspPackages) ++ (attrNames extraLspPackages));
+      mergeLanguage =
+        language: unique ((lspPackages.${language} or [ ]) ++ (extraLspPackages.${language} or [ ]));
+      combinedLspPackages = listToAttrs (
+        map (language: {
+          name = language;
+          value = mergeLanguage language;
+        }) languages
+      );
+      allLanguages = unique (flatten (attrValues combinedLspPackages));
+    in
+    combinedLspPackages // { inherit allLanguages; };
 
   neovimConfig = neovimUtils.makeNeovimConfig {
     inherit
@@ -97,7 +123,7 @@ let
               "--suffix"
               "PATH"
               ":"
-              "${lib.makeBinPath packages''}"
+              "${lib.makeBinPath (unique packages'')}"
             ]
 
           )
@@ -112,8 +138,16 @@ let
       }
     );
 
+  # TODO: make it passthru recurisve somehow 
+  # `.#default.withLsp.nix.lua`
   mynvim = mkMynvim packages';
-  withLsp = mkMynvim (packages' ++ lspPackages ++ extraLspPackages);
+  withLsp = (mkMynvim (packages' ++ lspPackages'.allLanguages)).overrideAttrs (
+    _: previousAttrs: {
+      passthru = recursiveUpdate previousAttrs.passthru (
+        mapAttrs (_: value: mkMynvim (packages' ++ value)) lspPackages'
+      );
+    }
+  );
 in
 mynvim.overrideAttrs (
   _: previousAttrs: { passthru = recursiveUpdate previousAttrs.passthru { inherit withLsp; }; }

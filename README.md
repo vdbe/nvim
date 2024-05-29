@@ -13,7 +13,13 @@ Available packages are
   * `noPlugins`: Without plugins
   * `minimal`: Everything stripped out
 
-Each variant also has a `withLsp` passthru that adds LSPs/formatter/...
+<details>
+<summary>Each variant also has a `withLsp` passthru that adds LSPs/formatter/...</summary>
+ 
+* `default.withLsp`
+* `default.withLsp.lua`
+* `default.withLsp.<language>`
+</details>
 
 <details>
 <summary>nix run</summary>
@@ -26,6 +32,9 @@ nix run github:vdbe/nvim#default.noPlugins
 ```
 ```bash
 nix run github:vdbe/nvim#default.withLsp
+```
+```bash
+nix run github:vdbe/nvim#default.withLsp.lua
 ```
 ...
 </details>
