@@ -1,1 +1,1 @@
-require "comet"
+require "tired.config.lazy"

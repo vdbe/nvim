@@ -1,9 +1,8 @@
 return {
   {
-    "AstroNvim/astrolsp",
-    optional = true,
+    "neovim/nvim-lspconfig",
     opts = {
-      config = {
+      servers = {
         nixd = {
           settings = {
             nixd = {
@@ -23,9 +22,8 @@ return {
     "nvim-treesitter/nvim-treesitter",
     optional = true,
     opts = function(_, opts)
-      if opts.ensure_installed ~= "all" then
-        opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "nix" })
-      end
+      opts.ensure_installed = opts.ensure_installed or {}
+      vim.list_extend(opts.ensure_installed, { "lua", "luap" })
     end,
   },
   -- NOTE: https://github.com/williamboman/mason-lspconfig.nvim/issues/390
@@ -36,27 +34,13 @@ return {
   --     opts.ensure_installed = require("astrocore").list_insert_unique(opts.ensure_installed, { "nixd" })
   --   end,
   -- },
-  -- {
-  --   "WhoIsSethDaniel/mason-tool-installer.nvim",
-  --   optional = true,
-  --   opts = function(_, opts)
-  --     opts.ensure_installed =
-  --       -- NOTE: does not have statix, deadnix or nixmft
-  --       require("astrocore").list_insert_unique(opts.ensure_installed, { "statix", "deadnix", "nixmft" })
-  --   end,
-  -- },
   {
-    "nvimtools/none-ls.nvim",
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
     optional = true,
     opts = function(_, opts)
-      local nls = require "null-ls"
-      if type(opts.sources) == "table" then
-        vim.list_extend(opts.sources, {
-          nls.builtins.code_actions.statix,
-          nls.builtins.diagnostics.deadnix,
-          -- nls.builtins.formatting.nixfmt, -- handled by nixd
-        })
-      end
+      opts.ensure_installed =
+        -- NOTE: does not have statix, deadnix or nixmft
+        require("astrocore").list_insert_unique(opts.ensure_installed, { "statix", "deadnix", "nixmft" })
     end,
   },
   -- Handled by nixd
@@ -74,7 +58,7 @@ return {
     optional = true,
     opts = {
       linters_by_ft = {
-        nix = { "statix" },
+        nix = { "deadnix", "statix" },
       },
     },
   },

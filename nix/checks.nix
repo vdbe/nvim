@@ -18,8 +18,9 @@ let
 
   variants = [
     "default"
-    # "default.noPlugins"
-    # "default.minimal"
+    "default.example"
+    "default.minimal"
+    "default.noPlugins"
   ];
 
   variantsDrv = builtins.listToAttrs (
@@ -45,7 +46,9 @@ let
       #   lib.filterAttrs (_: lib.isDerivation) variantDrv.tests
       # );
 
-      headlessCheck = mkHeadlessCheck variant { buildInputs = [ variantDrv ]; } "";
+      headlessCheck = mkHeadlessCheck variant {
+        buildInputs = [ variantDrv ] ++ (with pkgs; [ gitMinimal ]);
+      } "";
     in
     {
       "${variant}_headless" = headlessCheck;
@@ -55,7 +58,7 @@ in
 headless-checks
 // {
   check-treesitter-grammars = mkHeadlessCheck "check-headless" {
-    buildInputs = [ packages.neovim ];
+    buildInputs = [ packages.neovim ] ++ (with pkgs; [ gitMinimal ]);
   } "test.rs +InspectTree";
 
   # check-health = pkgs.runCommand "check-lazy-health" {} ''

@@ -31,75 +31,6 @@ let
     luaRc = "";
   };
 
-  comet = neovimBuilder {
-    nvim-src = fileset.toSource {
-      root = ../../../.;
-      fileset = fileset.unions [
-        ../../../lua/common
-        ../../../lua/comet
-      ];
-    };
-
-    lspPackages = with pkgs; {
-      nix = [
-        nixd
-        nixfmt-rfc-style
-        deadnix
-        statix
-      ];
-
-      lua = [
-        lua-language-server
-        stylua
-        selene
-      ];
-    };
-
-    plugins = with vimPlugins; [
-      lazy-nvim
-
-      astronvim
-      astrocore
-      astrolsp
-      astroui
-      astrocommunity
-
-      nvim-lspconfig
-      neoconf-nvim
-      lspkind-nvim
-      nvim-treesitter
-      nvim-treesitter-textobjects
-      none-ls-nvim
-      neodev-nvim
-      conform-nvim
-
-      nvim-cmp
-      cmp-buffer
-      cmp-nvim-lsp
-      cmp-path
-      cmp_luasnip
-      friendly-snippets
-      luasnip
-
-      nvim-dap
-      cmp-dap
-      nvim-dap-ui
-      nvim-nio
-
-      plenary-nvim
-      catppuccin-nvim
-      telescope-nvim
-      telescope-fzf-native-nvim
-      which-key-nvim
-      heirline-nvim
-      nvim-autopairs
-      gitsigns-nvim
-    ];
-    luaRc = ''
-      require("comet")
-    '';
-  };
-
   example = neovimBuilder {
     nvim-src = fileset.toSource {
       root = ../../../.;
@@ -112,18 +43,101 @@ let
       catppuccin-nvim
     ];
     luaRc = ''
-      require("nobody")
+      require("example")
+    '';
+  };
+
+  tired = neovimBuilder {
+    nvim-src = fileset.toSource {
+      root = ../../../.;
+      fileset = fileset.unions [
+        ../../../lua/common
+        ../../../lua/config
+        ../../../lua/tired
+      ];
+    };
+
+    lspPackages = with pkgs; rec {
+      lua = [
+        lua-language-server
+        stylua
+        selene
+      ];
+
+      nix = [
+        nixd
+        nixfmt-rfc-style
+        deadnix
+        statix
+      ];
+
+      rust = [
+        rust-analyzer
+
+        # Debugging
+        lldb
+      ] ++ toml;
+
+      toml = [ taplo ];
+    };
+
+    plugins = with vimPlugins; [
+      lazy-nvim
+      lazyvim
+
+      mini-ai
+      mini-pairs
+      trouble-nvim
+      conform-nvim
+      nvim-lint
+      neodev-nvim
+      neoconf-nvim
+
+      nvim-cmp
+      cmp-buffer
+      cmp-nvim-lsp
+      cmp-path
+      nvim-snippets
+      friendly-snippets
+
+      nvim-lspconfig
+
+      nvim-treesitter
+      nvim-treesitter-textobjects
+      ts-comments-nvim
+      nvim-ts-autotag
+
+      gitsigns-nvim
+      todo-comments-nvim
+
+      telescope-nvim
+      telescope-fzf-native-nvim
+      neo-tree-nvim
+
+      lualine-nvim
+      indent-blankline-nvim
+
+      catppuccin-nvim
+      which-key-nvim
+
+      # Dependencies
+      nvim-web-devicons
+      nui-nvim
+      plenary-nvim
+    ];
+    luaRc = ''
+      require("tired.config.lazy")
     '';
   };
 in
-comet.overrideAttrs (
+tired.overrideAttrs (
   _: previousAttrs: {
     passthru = recursiveUpdate previousAttrs.passthru {
       inherit
         example
-        comet
         noPlugins
         minimal
+        tired
         ;
     };
   }

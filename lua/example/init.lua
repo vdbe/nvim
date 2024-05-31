@@ -1,11 +1,12 @@
 vim.g.mapleader = " "
-vim.g.maplocalleader = ","
+vim.g.maplocalleader = "\\"
 
 vim.keymap.set({ "!", "t" }, "jk", [[<c-\><c-n>]], { desc = "Exit to normal mode" })
 
 local plugins_root = nil
 if vim.g.is_nix ~= true then
   vim.g.is_nix = false
+  vim.g.no_plugin = false
   local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
   if not (vim.uv or vim.loop).fs_stat(lazypath) then
     vim.fn.system {
@@ -24,7 +25,7 @@ else
 end
 
 require("lazy").setup({ -- plugins
-  import = "comet.plugins",
+  import = "example.plugins",
 }, { -- opts
   root = plugins_root,
   defaults = {

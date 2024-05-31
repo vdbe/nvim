@@ -8,8 +8,8 @@ git clone https://github.com/vdbe/nvim.git ~/.config/nvim
 ### Nix
 Available packages are
 
-* `default`/`neovim`: comet
-  * `comet`: IDE
+* `default`/`neovim`: `tired`
+  * `tired`: IDE
   * `noPlugins`: Without plugins
   * `minimal`: Everything stripped out
 

@@ -82,6 +82,9 @@
                 deadnix
                 nixd
                 statix
+
+                # other
+                typos
               ];
             };
           };

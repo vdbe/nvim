@@ -87,6 +87,21 @@
       "url": "https://api.github.com/repos/tree-sitter/tree-sitter-rust/tarball/v0.21.2",
       "hash": "1xn8l6jy91arhlxfmnlcw2lq41xhjr17rh3j63pc8mwjybly2970"
     },
+    "tree-sitter-toml": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "tree-sitter-grammars",
+        "repo": "tree-sitter-toml"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v0.6.0",
+      "revision": "16a30c83ce427385b8d14939c45c137fcfca6c42",
+      "url": "https://api.github.com/repos/tree-sitter-grammars/tree-sitter-toml/tarball/v0.6.0",
+      "hash": "1jb9ws82dv3acnis945i9pkwjk4h2alnhnkmd8gyiiam8crhz2sm"
+    },
     "tree-sitter-typescript": {
       "type": "GitRelease",
       "repository": {

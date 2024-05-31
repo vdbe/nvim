@@ -19,6 +19,7 @@
   extraPackages ? [ ],
   lspPackages ? { },
   extraLspPackages ? { },
+  excludeLspLanguages ? [ "rust" ],
   luaRc ? builtins.readFile ../../../init.lua,
   # Extras
   extraPlugins ? [ ],
@@ -32,6 +33,7 @@ let
     attrNames
     attrValues
     listToAttrs
+    removeAttrs
     ;
   inherit (lib.lists)
     optional
@@ -71,7 +73,7 @@ let
           value = mergeLanguage language;
         }) languages
       );
-      allLanguages = unique (flatten (attrValues combinedLspPackages));
+      allLanguages = removeAttrs (unique (flatten (attrValues combinedLspPackages))) excludeLspLanguages;
     in
     combinedLspPackages // { inherit allLanguages; };
 
