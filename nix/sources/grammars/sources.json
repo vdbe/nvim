@@ -1,5 +1,20 @@
 {
   "pins": {
+    "tree-sitter-bash": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "tree-sitter",
+        "repo": "tree-sitter-bash"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v0.21.0",
+      "revision": "f3f26f47a126797c011c311cec9d449d855c3eab",
+      "url": "https://api.github.com/repos/tree-sitter/tree-sitter-bash/tarball/v0.21.0",
+      "hash": "13mizaf84snksr0hs3fhax4vayb9rrv64qqgr6q0sxisqs3z25z9"
+    },
     "tree-sitter-c": {
       "type": "GitRelease",
       "repository": {
