@@ -116,6 +116,7 @@ let
 
       lualine-nvim
       indent-blankline-nvim
+      lsp-progress-nvim
 
       catppuccin-nvim
       which-key-nvim

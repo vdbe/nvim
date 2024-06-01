@@ -13,6 +13,9 @@ return {
         vim.o.laststatus = 0
       end
     end,
+    dependencies = {
+      { "linrongbin16/lsp-progress.nvim" },
+    },
     opts = function()
       -- PERF: we don't need this lualine require madness 🤷
       local lualine_require = require "lualine_require"
@@ -57,6 +60,23 @@ return {
               require("lazy.status").updates,
               cond = require("lazy.status").has_updates,
               color = LazyVim.ui.fg "Special",
+            },
+            {
+              icon = { icons.mics.ActiveLSP, align = "left" },
+              function()
+                return require("lsp-progress").progress {
+                  max_size = 80,
+                  format = function(messages)
+                    local active_clients = vim.lsp.get_clients()
+                    if #messages > 0 then return table.concat(messages, " ") end
+                    local client_names = {}
+                    for _, client in ipairs(active_clients) do
+                      if client and client.name ~= "" then table.insert(client_names, 1, client.name) end
+                    end
+                    return table.concat(client_names, ", ")
+                  end,
+                }
+              end,
             },
             {
               "diff",
@@ -107,6 +127,22 @@ return {
       end
 
       return opts
+    end,
+  },
+  {
+    "linrongbin16/lsp-progress.nvim",
+    optional = true,
+    opts = {},
+    config = function(_, opts)
+      require("lsp-progress").setup(opts)
+
+      -- listen lsp-progress event and refresh lualine
+      vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
+      vim.api.nvim_create_autocmd("User", {
+        group = "lualine_augroup",
+        pattern = "LspProgressStatusUpdated",
+        callback = require("lualine").refresh,
+      })
     end,
   },
 

@@ -282,6 +282,21 @@
       "url": "https://api.github.com/repos/folke/lazy.nvim/tarball/v10.21.0",
       "hash": "1x1470s79nailpad1hyd9mnfd823aw58mgh6crh6xm8xj54mxcy6"
     },
+    "lsp-progress.nvim": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "linrongbin16",
+        "repo": "lsp-progress.nvim"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v1.0.12",
+      "revision": "07ca8eadf7d02ca33ff4d1e9e500910fe17aa14d",
+      "url": "https://api.github.com/repos/linrongbin16/lsp-progress.nvim/tarball/v1.0.12",
+      "hash": "1ff09ivl1071cq7zcvws2n294dk55vpn31yxfvi3nivrlf4lcr8n"
+    },
     "lspkind.nvim": {
       "type": "Git",
       "repository": {
