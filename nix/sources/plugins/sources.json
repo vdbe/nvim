@@ -10,10 +10,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "v4.7.9",
-      "revision": "2aa86875bdfe088d2951befdd253f9e553868c6d",
-      "url": "https://api.github.com/repos/AstroNvim/AstroNvim/tarball/v4.7.9",
-      "hash": "173jxmqh5v9zx13la85qri91jrdwksmjc9f4fnv8vb85cn431x3g"
+      "version": "v4.8.2",
+      "revision": "242238da0fe5b983984dc4ec6799985cb6923f28",
+      "url": "https://api.github.com/repos/AstroNvim/AstroNvim/tarball/v4.8.2",
+      "hash": "14pnd29x59i6qhjq3cr5hdimfaw976mf89xmqmzykzy6ifns4b5z"
     },
     "LazyVim": {
       "type": "GitRelease",
@@ -25,10 +25,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "v12.1.0",
-      "revision": "298a8f5c5d7d854719eaf7c2ba113f463cab411d",
-      "url": "https://api.github.com/repos/LazyVim/LazyVim/tarball/v12.1.0",
-      "hash": "1p3i89zgirbza52g1zd1ryd4ayinjmbdz4j18zrzwsldsbxgnp0a"
+      "version": "v12.2.0",
+      "revision": "2e9da7f41f826df5fcfff1897f18ebb277ec5f0c",
+      "url": "https://api.github.com/repos/LazyVim/LazyVim/tarball/v12.2.0",
+      "hash": "1mwilmrp7wv8zdy6w7yjr5cfj2a9d17slkkk2sz7wvi89sgnxjna"
     },
     "LuaSnip": {
       "type": "GitRelease",
@@ -277,10 +277,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "v10.21.0",
-      "revision": "24fa2a97085ca8a7220b5b078916f81e316036fd",
-      "url": "https://api.github.com/repos/folke/lazy.nvim/tarball/v10.21.0",
-      "hash": "1x1470s79nailpad1hyd9mnfd823aw58mgh6crh6xm8xj54mxcy6"
+      "version": "v10.22.0",
+      "revision": "ad30030b6abca7dac5a493c58b4d183b3fe93202",
+      "url": "https://api.github.com/repos/folke/lazy.nvim/tarball/v10.22.0",
+      "hash": "1rnkpfw19zsxjpswkl93ch1mnb7dsakx8k9fp3ypkf535yg436l5"
     },
     "lsp-progress.nvim": {
       "type": "GitRelease",
@@ -391,10 +391,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "v2.5.2",
-      "revision": "da1562e1e3df0e994ddc52cb4ba22376a5d7f2fc",
-      "url": "https://api.github.com/repos/folke/neodev.nvim/tarball/v2.5.2",
-      "hash": "0xxr4z1jmqfdi2cn6l6fvzx0cydf5r162yd434248ghpah2yv6qy"
+      "version": "v3.0.0",
+      "revision": "1f4ebcc10852518166ce165e57d425a4265a10d4",
+      "url": "https://api.github.com/repos/folke/neodev.nvim/tarball/v3.0.0",
+      "hash": "1lfj7ww8fplmj0xmm2qa4f8ifqapvmdra9s8gwz770b7dyraj615"
     },
     "none-ls.nvim": {
       "type": "Git",
@@ -404,9 +404,9 @@
         "repo": "none-ls.nvim"
       },
       "branch": "main",
-      "revision": "60f5f80686f5a272ed3281a7d4962cb54dc5348e",
-      "url": "https://github.com/nvimtools/none-ls.nvim/archive/60f5f80686f5a272ed3281a7d4962cb54dc5348e.tar.gz",
-      "hash": "1199c37ca4y44k5p18gr5vh57v2ga6gbhw3d1j6f1fsipxpvz2xj"
+      "revision": "f5b960a73418249aebcdae3455de320360509253",
+      "url": "https://github.com/nvimtools/none-ls.nvim/archive/f5b960a73418249aebcdae3455de320360509253.tar.gz",
+      "hash": "0v043gax7w2rjjvsvmi6rkppxdx4l5pj9i4a83gavf9c3z56cgbf"
     },
     "nui.nvim": {
       "type": "GitRelease",
@@ -457,10 +457,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "0.7.0",
-      "revision": "15ef3aeb117b63734e9a3ff1ab5ab488747a62f0",
-      "url": "https://api.github.com/repos/mfussenegger/nvim-dap/tarball/0.7.0",
-      "hash": "1pwn5c0hjm3wpzzybbakxgpq4bd7f6aygvslhivi4inzn48dla90"
+      "version": "0.8.0",
+      "revision": "b303b5b4cf23a93709f5571d567d2fd42d4e81ff",
+      "url": "https://api.github.com/repos/mfussenegger/nvim-dap/tarball/0.8.0",
+      "hash": "08w3s0imqlraksz1h13789a36xw2f6bnq84rnb268wyfcc1nmlwd"
     },
     "nvim-dap-ui": {
       "type": "GitRelease",
@@ -485,9 +485,9 @@
         "repo": "nvim-lint"
       },
       "branch": "master",
-      "revision": "d64724699970e8b0d76238efbddd64fe688ac169",
-      "url": "https://github.com/mfussenegger/nvim-lint/archive/d64724699970e8b0d76238efbddd64fe688ac169.tar.gz",
-      "hash": "00b3hsl71lkjbdckj7908bfjfinnp7wrvd9i5s1s2mchwkyi9nmg"
+      "revision": "2f90fe977ef21db3bf3b7a1ceaf4a1e3aafb2b26",
+      "url": "https://github.com/mfussenegger/nvim-lint/archive/2f90fe977ef21db3bf3b7a1ceaf4a1e3aafb2b26.tar.gz",
+      "hash": "1w9kgnqg915f8m2i3j5b3kwrxhlb3blngnjifzhi4msp1wii0z69"
     },
     "nvim-lspconfig": {
       "type": "GitRelease",
@@ -542,9 +542,9 @@
         "repo": "nvim-treesitter"
       },
       "branch": "master",
-      "revision": "ea2b137f35fb1e87a6471ec311805920fdf45745",
-      "url": "https://github.com/nvim-treesitter/nvim-treesitter/archive/ea2b137f35fb1e87a6471ec311805920fdf45745.tar.gz",
-      "hash": "0vrsjlzxb092ivvk8wiffci84880mh8lnhycgzld2xkxy615nyc1"
+      "revision": "979beffc1a86e7ba19bd6535c0370d8e1aaaad3c",
+      "url": "https://github.com/nvim-treesitter/nvim-treesitter/archive/979beffc1a86e7ba19bd6535c0370d8e1aaaad3c.tar.gz",
+      "hash": "1fzvcsgsddvxppw1w7avx9yir3wkvjgx673piy92xxvlfhr3i2sc"
     },
     "nvim-treesitter-textobjects": {
       "type": "Git",
@@ -554,9 +554,9 @@
         "repo": "nvim-treesitter-textobjects"
       },
       "branch": "master",
-      "revision": "3557e41418b4a6c5b85d5d64abe94c9c50fa9b14",
-      "url": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects/archive/3557e41418b4a6c5b85d5d64abe94c9c50fa9b14.tar.gz",
-      "hash": "111ywl75bpfmfrawnw2rrjlvrd2amyh6ivac0w8xlh38x5l06ncy"
+      "revision": "fd41b7ccc5490a3a99c734d1ee418b68d06c48a9",
+      "url": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects/archive/fd41b7ccc5490a3a99c734d1ee418b68d06c48a9.tar.gz",
+      "hash": "1s3282fzl28hfbhqlcc392cidnsjxr0a50rb9qlci4bl0r9jglgc"
     },
     "nvim-ts-autotag": {
       "type": "Git",
@@ -667,10 +667,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "v3.0.0",
-      "revision": "971ad925ff6fdb57950d7c5d4c5d65e2cdbaecec",
-      "url": "https://api.github.com/repos/folke/trouble.nvim/tarball/v3.0.0",
-      "hash": "0y8wldrab1b6rk1i1qpkap7j95wq0h9s1p661zxz4ffgfqxs7vab"
+      "version": "v3.1.0",
+      "revision": "46a19388d3507f4c4bebb9994bf821a79b3bc342",
+      "url": "https://api.github.com/repos/folke/trouble.nvim/tarball/v3.1.0",
+      "hash": "07ylcwi07fdnhs4g1xgirq4k19812rnnw7dsvzx912d0k6vdapra"
     },
     "ts-comments.nvim": {
       "type": "GitRelease",
@@ -697,10 +697,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "v1.6.0",
-      "revision": "ce741eb559c924d72e3a67d2189ad3771a231414",
-      "url": "https://api.github.com/repos/folke/which-key.nvim/tarball/v1.6.0",
-      "hash": "14v5yzrbxqpmy1c1l54llrihxqgbjcmbnbwd1x6sg80lrixqhl8i"
+      "version": "v1.6.1",
+      "revision": "4b7167f8fb2dba3d01980735e3509e172c024c29",
+      "url": "https://api.github.com/repos/folke/which-key.nvim/tarball/v1.6.1",
+      "hash": "0wv4lj7rpkc80w3sghhk817pm49pc6g9b1b7i0j67nvsdp83fdgf"
     }
   },
   "version": 3

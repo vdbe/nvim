@@ -25,10 +25,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "v0.21.3",
-      "revision": "00ed08f1a6c18141bfd7a81638e4d239a0bb55cc",
-      "url": "https://api.github.com/repos/tree-sitter/tree-sitter-c/tarball/v0.21.3",
-      "hash": "0xqppma7a85pvcvkd986iqrfxm8wnprbz692pcsnmj5i5lnwgimr"
+      "version": "v0.21.4",
+      "revision": "deca017a554045b4c203e7ddff39ae64ff05e071",
+      "url": "https://api.github.com/repos/tree-sitter/tree-sitter-c/tarball/v0.21.4",
+      "hash": "077xnqj7gc662wkbdv1kg91q85yf82w9msfb7d36zvzq613c1yxs"
     },
     "tree-sitter-lua": {
       "type": "GitRelease",
