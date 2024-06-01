@@ -195,6 +195,21 @@
       "url": "https://api.github.com/repos/stevearc/conform.nvim/tarball/v5.8.0",
       "hash": "1ic95x2alfcnppc3ylhbd924xm6nrdc74qvlrdgyicxzp6fl2wlj"
     },
+    "crates.nvim": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "Saecki",
+        "repo": "crates.nvim"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v0.4.0",
+      "revision": "8437522d12a8c523da2aee9db2979d070b2ecc33",
+      "url": "https://api.github.com/repos/Saecki/crates.nvim/tarball/v0.4.0",
+      "hash": "00a4pgxhxb7fzn8rfak9l1i00zi44bzyk7liqfcnc1x39mmjwvzg"
+    },
     "friendly-snippets": {
       "type": "Git",
       "repository": {
@@ -569,6 +584,21 @@
       "revision": "50012918b2fc8357b87cff2a7f7f0446e47da174",
       "url": "https://api.github.com/repos/nvim-lua/plenary.nvim/tarball/v0.1.4",
       "hash": "1sn7vpsbwpyndsjyxb4af8fvz4sfhlbavvw6jjsv3h18sdvkh7nd"
+    },
+    "rustaceanvim": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "mrcjkb",
+        "repo": "rustaceanvim"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "4.24.0",
+      "revision": "2fa45427c01ded4d3ecca72e357f8a60fd8e46d4",
+      "url": "https://api.github.com/repos/mrcjkb/rustaceanvim/tarball/4.24.0",
+      "hash": "0gzda6ff89g4l78wa0z1y885pr4zsf1liplld3l102slczkvacjg"
     },
     "telescope-fzf-native.nvim": {
       "type": "Git",

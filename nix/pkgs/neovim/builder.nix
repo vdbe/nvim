@@ -73,7 +73,7 @@ let
           value = mergeLanguage language;
         }) languages
       );
-      allLanguages = removeAttrs (unique (flatten (attrValues combinedLspPackages))) excludeLspLanguages;
+      allLanguages = unique (flatten (attrValues (removeAttrs combinedLspPackages excludeLspLanguages)));
     in
     combinedLspPackages // { inherit allLanguages; };
 

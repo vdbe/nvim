@@ -120,6 +120,9 @@ let
       catppuccin-nvim
       which-key-nvim
 
+      crates-nvim
+      rustaceanvim
+
       # Dependencies
       nvim-web-devicons
       nui-nvim
