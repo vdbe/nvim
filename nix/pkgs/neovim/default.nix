@@ -1,4 +1,5 @@
 {
+  version ? "unknown-dirty",
   pkgs,
   lib,
   callPackage,
@@ -9,7 +10,7 @@ let
   inherit (lib) fileset;
   inherit (lib.attrsets) recursiveUpdate;
 
-  neovimBuilder = callPackage ./builder.nix;
+  neovimBuilder = args: callPackage ./builder.nix ({ inherit version; } // args);
 
   minimal = noPlugins.override {
     treesitter-grammars = [ ];

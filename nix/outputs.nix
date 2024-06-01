@@ -23,5 +23,5 @@ in
     }
   );
 
-  legacyPackages = forAllSystems (pkgs: import ./pkgs { inherit pkgs; });
+  legacyPackages = forAllSystems (pkgs: import ./pkgs { inherit self pkgs; });
 }
