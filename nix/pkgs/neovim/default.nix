@@ -59,16 +59,25 @@ let
     };
 
     lspPackages = with pkgs; rec {
+      bash = [
+        nodePackages.bash-language-server
+
+        shellcheck
+        shfmt
+      ];
+
       lua = [
         lua-language-server
-        stylua
+
         selene
+        stylua
       ];
 
       nix = [
         nixd
-        nixfmt-rfc-style
+
         deadnix
+        nixfmt-rfc-style
         statix
       ];
 
