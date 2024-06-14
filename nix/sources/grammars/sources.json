@@ -142,10 +142,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "v2.5.1",
-      "revision": "241b5e2dd7bd8eb7f7ef84f14cbfdd26d474bda3",
-      "url": "https://api.github.com/repos/neovim/tree-sitter-vimdoc/tarball/v2.5.1",
-      "hash": "0br4i6s1f43nm2j61k3i2mfdr02hwnscnwm59lnbj00pdlv69sdv"
+      "version": "v3.0.0",
+      "revision": "f13cca4106838195eececad36e2b475b3c1f3006",
+      "url": "https://api.github.com/repos/neovim/tree-sitter-vimdoc/tarball/v3.0.0",
+      "hash": "0raqlzi2x9a0qrfidgw0gqda8030jz518kdwzvyxjndnd5cd5rdz"
     }
   },
   "version": 3
