@@ -100,8 +100,8 @@ let
       trouble-nvim
       conform-nvim
       nvim-lint
-      neodev-nvim
-      neoconf-nvim
+      luvit-meta
+      lazydev-nvim
 
       nvim-cmp
       cmp-buffer
@@ -138,6 +138,7 @@ let
       nvim-web-devicons
       nui-nvim
       plenary-nvim
+      dressing-nvim
     ];
     luaRc = ''
       require("tired.config.lazy")
