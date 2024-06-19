@@ -8,7 +8,7 @@ in
 {
   apps = forAllSystems (pkgs: import ./apps.nix { inherit self pkgs; });
 
-  checks = forAllSystems (pkgs: import ./checks.nix { inherit self pkgs; });
+  checks = forAllSystems (pkgs: import ./checks { inherit self pkgs; });
 
   formatter = forAllSystems (pkgs: pkgs.nixfmt-rfc-style);
 

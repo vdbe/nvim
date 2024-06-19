@@ -1,14 +1,20 @@
-{ self, pkgs }:
+{
+  self,
+  pkgs,
+  lib ? pkgs.lib,
+}:
 let
-  inherit (pkgs) lib;
+  inherit (lib.attrsets) optionalAttrs;
 
   packages = self.packages.${pkgs.system};
+
+  missingPluginsScriptLua = ./missing-plugins.lua;
 
   mkHeadlessCheck =
     name: drvArgs: nvimArgs:
     pkgs.runCommandNoCC name drvArgs ''
       export HOME="$(mktemp -d)"
-      nvim --headless ${nvimArgs} +qa 2>$out
+      nvim --headless '${nvimArgs}' +qa 2>$out
 
       cat $out
       test -s $out && exit 1
@@ -49,10 +55,16 @@ let
       headlessCheck = mkHeadlessCheck variant {
         buildInputs = [ variantDrv ] ++ (with pkgs; [ gitMinimal ]);
       } "";
+      missingPluginsCheck = mkHeadlessCheck variant {
+        buildInputs = [ variantDrv ] ++ (with pkgs; [ gitMinimal ]);
+      } "+luafile ${missingPluginsScriptLua}";
     in
     {
       "${variant}_headless" = headlessCheck;
     }
+    // (optionalAttrs (variant != "default.minimal") {
+      "${variant}_missingPlugins" = missingPluginsCheck;
+    })
   ) variantsDrv;
 in
 headless-checks
