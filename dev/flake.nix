@@ -56,7 +56,7 @@
 
             settings = {
               global = {
-                excludes = [ "./nix/sources/**" ];
+                excludes = [ "nix/sources/**" ];
               };
               formatter = {
                 "typos" = {
