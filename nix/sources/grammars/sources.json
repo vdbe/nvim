@@ -68,9 +68,9 @@
         "repo": "tree-sitter-nix"
       },
       "branch": "master",
-      "revision": "b3cda619248e7dd0f216088bd152f59ce0bbe488",
-      "url": "https://github.com/nix-community/tree-sitter-nix/archive/b3cda619248e7dd0f216088bd152f59ce0bbe488.tar.gz",
-      "hash": "1xh75z11d1b514qm997br8vmxalir2ah1pk7v3k1ppm28043ggr1"
+      "revision": "0fdada10f1f845ca9116e279ad8f5d0ca93e9949",
+      "url": "https://github.com/nix-community/tree-sitter-nix/archive/0fdada10f1f845ca9116e279ad8f5d0ca93e9949.tar.gz",
+      "hash": "1vnf28sgzck9i020is5m5ff95b6sxp2kams21nwrajvq66a38xl6"
     },
     "tree-sitter-query": {
       "type": "GitRelease",

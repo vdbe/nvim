@@ -23,7 +23,7 @@ return {
     optional = true,
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
-      vim.list_extend(opts.ensure_installed, { "lua", "luap" })
+      vim.list_extend(opts.ensure_installed, { "nix" })
     end,
   },
   -- NOTE: https://github.com/williamboman/mason-lspconfig.nvim/issues/390
@@ -40,7 +40,7 @@ return {
     opts = function(_, opts)
       opts.ensure_installed =
         -- NOTE: does not have statix, deadnix or nixmft
-        require("astrocore").list_insert_unique(opts.ensure_installed, { "statix", "deadnix", "nixmft" })
+        vim.list_extend(opts.ensure_installed, { "statix", "deadnix", "nixfmt" })
     end,
   },
   -- Handled by nixd
