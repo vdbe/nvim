@@ -127,10 +127,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": null,
-      "version": "v0.21.1",
-      "revision": "7b4275d077ae196fc0ce42ab3ad091574e3ec519",
-      "url": "https://api.github.com/repos/tree-sitter/tree-sitter-typescript/tarball/v0.21.1",
-      "hash": "1w113zbh322i39pr3cym4n4kvs33sg004mpca5mydh1nx19w06x1"
+      "version": "v0.21.2",
+      "revision": "9f804be960f289a0acc59d8564acc16857b0b088",
+      "url": "https://api.github.com/repos/tree-sitter/tree-sitter-typescript/tarball/v0.21.2",
+      "hash": "18cw7rmfkbl7wg0apw23nkj3hi1khikas3v27ipjh13bhrmjy9wf"
     },
     "tree-sitter-vimdoc": {
       "type": "GitRelease",
