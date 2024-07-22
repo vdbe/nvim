@@ -119,6 +119,7 @@ let
 
       gitsigns-nvim
       todo-comments-nvim
+      grug-far-nvim
 
       telescope-nvim
       telescope-fzf-native-nvim

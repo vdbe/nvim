@@ -252,6 +252,18 @@
       "url": "https://api.github.com/repos/lewis6991/gitsigns.nvim/tarball/v0.9.0",
       "hash": "100hqm6fwd8nnwc0m66ap8dwzgbcfgprxh8m326f314bl83f7f81"
     },
+    "grug-far.nvim": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "MagicDuck",
+        "repo": "grug-far.nvim"
+      },
+      "branch": "main",
+      "revision": "0fb9cb0f96acbd75f524312c8587bef2a0e20181",
+      "url": "https://github.com/MagicDuck/grug-far.nvim/archive/0fb9cb0f96acbd75f524312c8587bef2a0e20181.tar.gz",
+      "hash": "0nvzmnipi6f8akzba0n6jg8i8rmpb29hk4s6glqc5pwpvbq5cial"
+    },
     "heirline.nvim": {
       "type": "GitRelease",
       "repository": {
