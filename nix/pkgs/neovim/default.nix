@@ -120,6 +120,7 @@ let
       gitsigns-nvim
       todo-comments-nvim
       grug-far-nvim
+      vimtex
 
       telescope-nvim
       telescope-fzf-native-nvim

@@ -144,6 +144,18 @@
       "url": "https://github.com/rcarriga/cmp-dap/archive/ea92773e84c0ad3288c3bc5e452ac91559669087.tar.gz",
       "hash": "0xa3qh1bnr5s5fzxjziq30rjp9sdsb5vpf209qrna9972zhlnby2"
     },
+    "cmp-latex-symbols": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "kdheepak",
+        "repo": "cmp-latex-symbols"
+      },
+      "branch": "main",
+      "revision": "165fb66afdbd016eaa1570e41672c4c557b57124",
+      "url": "https://github.com/kdheepak/cmp-latex-symbols/archive/165fb66afdbd016eaa1570e41672c4c557b57124.tar.gz",
+      "hash": "19hrj03b1l6n981h0rjy6y98fach7hj64hh3l787w1wkhq3pirxj"
+    },
     "cmp-nvim-lsp": {
       "type": "Git",
       "repository": {
@@ -740,6 +752,21 @@
       "revision": "2d9882f8b06b05f5f79520e31cc6ba14ceb8910d",
       "url": "https://api.github.com/repos/folke/ts-comments.nvim/tarball/v1.4.0",
       "hash": "0vbahzl27d39r8bijsg5d17hnsfm19mz71w7s2ydyfah0mpgj48j"
+    },
+    "vimtex": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "lervag",
+        "repo": "vimtex"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v2.15",
+      "revision": "9f6a5bb0a9c9f1542fe88dc07511ce8401242e2a",
+      "url": "https://api.github.com/repos/lervag/vimtex/tarball/v2.15",
+      "hash": "11xlrnp48813hvgl6rb76z22a0gnpjx89xhkqd657ncmzkyp5grl"
     },
     "which-key.nvim": {
       "type": "GitRelease",

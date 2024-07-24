@@ -30,6 +30,21 @@
       "url": "https://api.github.com/repos/tree-sitter/tree-sitter-c/tarball/v0.21.4",
       "hash": "077xnqj7gc662wkbdv1kg91q85yf82w9msfb7d36zvzq613c1yxs"
     },
+    "tree-sitter-latex": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "latex-lsp",
+        "repo": "tree-sitter-latex"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v0.4.0",
+      "revision": "a834712c5e04029a451a262456bf6290b8ef6f37",
+      "url": "https://api.github.com/repos/latex-lsp/tree-sitter-latex/tarball/v0.4.0",
+      "hash": "18dyda7299imb6i2jnjpr7z2jdrjn804c3958nkkpxzzfhbq39h7"
+    },
     "tree-sitter-lua": {
       "type": "GitRelease",
       "repository": {
