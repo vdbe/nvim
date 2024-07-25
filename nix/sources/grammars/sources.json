@@ -30,6 +30,48 @@
       "url": "https://api.github.com/repos/tree-sitter/tree-sitter-c/tarball/v0.21.4",
       "hash": "077xnqj7gc662wkbdv1kg91q85yf82w9msfb7d36zvzq613c1yxs"
     },
+    "tree-sitter-json": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "tree-sitter",
+        "repo": "tree-sitter-json"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v0.21.0",
+      "revision": "80e623c2165887f9829357acfa9c0a0bab34a3cd",
+      "url": "https://api.github.com/repos/tree-sitter/tree-sitter-json/tarball/v0.21.0",
+      "hash": "0mjphf34k5d0h28wwafwljk486h5mzx30dqdxz23lcmvnh0s79y1"
+    },
+    "tree-sitter-json5": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "joakker",
+        "repo": "tree-sitter-json5"
+      },
+      "branch": "master",
+      "revision": "ab0ba8229d639ec4f3fa5f674c9133477f4b77bd",
+      "url": "https://github.com/joakker/tree-sitter-json5/archive/ab0ba8229d639ec4f3fa5f674c9133477f4b77bd.tar.gz",
+      "hash": "0n33v04d5q79j1qp1l26ygfqywl7vxfam38dap78g6i7ys78581d"
+    },
+    "tree-sitter-jsonc": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitLab",
+        "repo_path": "WhyNotHugo/tree-sitter-jsonc",
+        "server": "https://gitlab.com/"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v0.3.0",
+      "revision": "9e7d24fada6a8a420bffe3f44dbbd297dbe18f80",
+      "url": "https://gitlab.com/api/v4/projects/WhyNotHugo%2Ftree-sitter-jsonc/repository/archive.tar.gz?ref=v0.3.0",
+      "hash": "0mc68i7shwmn88iv3lcqyjvrhy3b62h02k272is7chk2yiw3crw9"
+    },
     "tree-sitter-latex": {
       "type": "GitRelease",
       "repository": {
@@ -161,6 +203,21 @@
       "revision": "f13cca4106838195eececad36e2b475b3c1f3006",
       "url": "https://api.github.com/repos/neovim/tree-sitter-vimdoc/tarball/v3.0.0",
       "hash": "0raqlzi2x9a0qrfidgw0gqda8030jz518kdwzvyxjndnd5cd5rdz"
+    },
+    "tree-sitter-yaml": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "tree-sitter-grammars",
+        "repo": "tree-sitter-yaml"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v0.6.1",
+      "revision": "08ab1fbc18beac06b2938495a2c6ab17b5a6abc5",
+      "url": "https://api.github.com/repos/tree-sitter-grammars/tree-sitter-yaml/tarball/v0.6.1",
+      "hash": "1jx6a54cjn1xd5g5y9z44y2nnfs288g40bs3dbjzsf6x8x87l32z"
     }
   },
   "version": 3

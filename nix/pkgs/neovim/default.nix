@@ -89,6 +89,10 @@ let
       ] ++ toml;
 
       toml = [ taplo ];
+
+      yaml = [ yaml-language-server ];
+
+      json = [ vscode-langservers-extracted ];
     };
 
     plugins = with vimPlugins; [
@@ -116,6 +120,7 @@ let
       nvim-treesitter-textobjects
       ts-comments-nvim
       nvim-ts-autotag
+      schemastore-nvim
 
       gitsigns-nvim
       todo-comments-nvim

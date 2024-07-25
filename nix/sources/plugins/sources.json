@@ -45,6 +45,18 @@
       "url": "https://api.github.com/repos/L3MON4D3/LuaSnip/tarball/v2.3.0",
       "hash": "0bbackpym8k11gm32iwwzqjnqanpralanfjkl4lrs33xl7lsylqk"
     },
+    "SchemaStore.nvim": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "b0o",
+        "repo": "SchemaStore.nvim"
+      },
+      "branch": "main",
+      "revision": "bb370d8ea2055ec3807205367a91d12b9c13dae9",
+      "url": "https://github.com/b0o/SchemaStore.nvim/archive/bb370d8ea2055ec3807205367a91d12b9c13dae9.tar.gz",
+      "hash": "1j63d0azhq0cp8hw4ipjpfiz6wbs3adafqgwjdbkj8xibl99yvxd"
+    },
     "astrocommunity": {
       "type": "GitRelease",
       "repository": {
