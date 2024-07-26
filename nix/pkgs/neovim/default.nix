@@ -81,6 +81,11 @@ let
         statix
       ];
 
+      python = [
+        pyright
+        ruff
+      ];
+
       rust = [
         rust-analyzer
 
@@ -114,6 +119,13 @@ let
       nvim-snippets
       friendly-snippets
 
+      nvim-dap
+      nvim-dap-ui
+      nvim-dap-virtual-text
+      nvim-nio
+
+      nvim-dap-python
+
       nvim-lspconfig
 
       nvim-treesitter
@@ -121,6 +133,7 @@ let
       ts-comments-nvim
       nvim-ts-autotag
       schemastore-nvim
+      venv-selector-nvim
 
       gitsigns-nvim
       todo-comments-nvim

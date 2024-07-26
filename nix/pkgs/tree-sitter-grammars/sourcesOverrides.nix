@@ -3,6 +3,14 @@ _: _: super: {
     generate = true;
   };
 
+  tree-sitter-markdown = super.tree-sitter-markdown // {
+    location = "tree-sitter-markdown";
+  };
+
+  tree-sitter-markdown-inline = super.tree-sitter-markdown // {
+    location = "tree-sitter-markdown";
+  };
+
   tree-sitter-typescript = super.tree-sitter-typescript // {
     location = "typescript";
   };

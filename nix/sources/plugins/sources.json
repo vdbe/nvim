@@ -474,6 +474,21 @@
       "url": "https://api.github.com/repos/folke/neodev.nvim/tarball/v3.0.0",
       "hash": "1lfj7ww8fplmj0xmm2qa4f8ifqapvmdra9s8gwz770b7dyraj615"
     },
+    "neotest": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nvim-neotest",
+        "repo": "neotest"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v5.4.0",
+      "revision": "32ff2ac21135a372a42b38ae131e531e64833bd3",
+      "url": "https://api.github.com/repos/nvim-neotest/neotest/tarball/v5.4.0",
+      "hash": "144wzzadhrg48fkihffk6jf9c0ij8dg9gng6mcxq5z8mdcvz0124"
+    },
     "none-ls.nvim": {
       "type": "Git",
       "repository": {
@@ -540,6 +555,18 @@
       "url": "https://api.github.com/repos/mfussenegger/nvim-dap/tarball/0.8.0",
       "hash": "08w3s0imqlraksz1h13789a36xw2f6bnq84rnb268wyfcc1nmlwd"
     },
+    "nvim-dap-python": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "mfussenegger",
+        "repo": "nvim-dap-python"
+      },
+      "branch": "master",
+      "revision": "d777c2b32ed39f61209c09bede28d7491621a631",
+      "url": "https://github.com/mfussenegger/nvim-dap-python/archive/d777c2b32ed39f61209c09bede28d7491621a631.tar.gz",
+      "hash": "1fsfnir1af847hmxgc6ca3hxqpnik9dv1s7ag28kzmvy0wj8clav"
+    },
     "nvim-dap-ui": {
       "type": "GitRelease",
       "repository": {
@@ -554,6 +581,18 @@
       "revision": "f7d75cca202b52a60c520ec7b1ec3414d6e77b0f",
       "url": "https://api.github.com/repos/rcarriga/nvim-dap-ui/tarball/v4.0.0",
       "hash": "1b6836m18rl7mw0zc5jm258cmj0c68hxbw1jd82j1bp9d4klkjkh"
+    },
+    "nvim-dap-virtual-text": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "theHamsta",
+        "repo": "nvim-dap-virtual-text"
+      },
+      "branch": "master",
+      "revision": "484995d573c0f0563f6a66ebdd6c67b649489615",
+      "url": "https://github.com/theHamsta/nvim-dap-virtual-text/archive/484995d573c0f0563f6a66ebdd6c67b649489615.tar.gz",
+      "hash": "0p889jkyia04l4nhndmg4yl88mc10hf0fzgyyqj08ybzws5z9zgr"
     },
     "nvim-lint": {
       "type": "Git",
@@ -764,6 +803,18 @@
       "revision": "2d9882f8b06b05f5f79520e31cc6ba14ceb8910d",
       "url": "https://api.github.com/repos/folke/ts-comments.nvim/tarball/v1.4.0",
       "hash": "0vbahzl27d39r8bijsg5d17hnsfm19mz71w7s2ydyfah0mpgj48j"
+    },
+    "venv-selector.nvim": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "linux-cultist",
+        "repo": "venv-selector.nvim"
+      },
+      "branch": "regexp",
+      "revision": "47159757b334343fe60f16d52478f827ccefa09d",
+      "url": "https://github.com/linux-cultist/venv-selector.nvim/archive/47159757b334343fe60f16d52478f827ccefa09d.tar.gz",
+      "hash": "1qsplf1zns9981ybdl62z5w7wg5ddhc0sp9w5zaiqrbcji7gfmxx"
     },
     "vimtex": {
       "type": "GitRelease",

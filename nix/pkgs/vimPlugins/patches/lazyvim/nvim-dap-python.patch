@@ -1,0 +1,17 @@
+diff --git a/lua/lazyvim/plugins/extras/lang/python.lua b/lua/lazyvim/plugins/extras/lang/python.lua
+index f85b23b..aa94b7e 100644
+--- a/lua/lazyvim/plugins/extras/lang/python.lua
++++ b/lua/lazyvim/plugins/extras/lang/python.lua
+@@ -103,11 +103,7 @@ return {
+         { "<leader>dPc", function() require('dap-python').test_class() end, desc = "Debug Class", ft = "python" },
+       },
+       config = function()
+-        if vim.fn.has("win32") == 1 then
+-          require("dap-python").setup(LazyVim.get_pkg_path("debugpy", "/venv/Scripts/pythonw.exe"))
+-        else
+-          require("dap-python").setup(LazyVim.get_pkg_path("debugpy", "/venv/bin/python"))
+-        end
++        require("dap-python").setup("python")
+       end,
+     },
+   },

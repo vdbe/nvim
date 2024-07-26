@@ -24,6 +24,12 @@ self: super: {
     }
   );
 
+  lazyvim = super.lazyvim.overrideAttrs (
+    _: previousAttrs: {
+      patches = previousAttrs.patches or [ ] ++ [ ./patches/lazyvim/nvim-dap-python.patch ];
+    }
+  );
+
   none-ls-nvim = super.none-ls-nvim.overrideAttrs { dependencies = with self; [ plenary-nvim ]; };
 
   nvim-treesitter = super.nvim-treesitter.overrideAttrs (
