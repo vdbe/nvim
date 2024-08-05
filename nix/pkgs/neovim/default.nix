@@ -163,7 +163,7 @@ let
       rustaceanvim
 
       # Dependencies
-      nvim-web-devicons
+      mini-icons
       nui-nvim
       plenary-nvim
       dressing-nvim

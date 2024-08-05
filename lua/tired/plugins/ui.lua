@@ -53,13 +53,13 @@ return {
             -- stylua: ignore
             {
               function() return "  " .. require("dap").status() end,
-              cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
-              color = LazyVim.ui.fg("Debug"),
+              cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
+              color = function() return LazyVim.ui.fg("Debug") end,
             },
             {
               require("lazy.status").updates,
               cond = require("lazy.status").has_updates,
-              color = LazyVim.ui.fg "Special",
+              color = function() return LazyVim.ui.fg "Special" end,
             },
             {
               icon = { icons.mics.ActiveLSP, align = "left" },
@@ -176,5 +176,23 @@ return {
   },
 
   -- icons
-  { "nvim-tree/nvim-web-devicons", lazy = true },
+  {
+    "echasnovski/mini.icons",
+    lazy = true,
+    opts = {
+      file = {
+        [".keep"] = { glyph = "󰊢", hl = "MiniIconsGrey" },
+        ["devcontainer.json"] = { glyph = "", hl = "MiniIconsAzure" },
+      },
+      filetype = {
+        dotenv = { glyph = "", hl = "MiniIconsYellow" },
+      },
+    },
+    init = function()
+      package.preload["nvim-web-devicons"] = function()
+        require("mini.icons").mock_nvim_web_devicons()
+        return package.loaded["nvim-web-devicons"]
+      end
+    end,
+  },
 }
