@@ -30,6 +30,36 @@
       "url": "https://api.github.com/repos/tree-sitter/tree-sitter-c/tarball/v0.21.4",
       "hash": "077xnqj7gc662wkbdv1kg91q85yf82w9msfb7d36zvzq613c1yxs"
     },
+    "tree-sitter-go": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "tree-sitter",
+        "repo": "tree-sitter-go"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v0.21.0",
+      "revision": "5c0024cfbb10f0a6b54ed4b14dc5acadacd19b61",
+      "url": "https://api.github.com/repos/tree-sitter/tree-sitter-go/tarball/v0.21.0",
+      "hash": "05xgc00zafksjri4i39ainqvfxlnf8v18ymys3izy9v6xdqrbmgd"
+    },
+    "tree-sitter-go-sum": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "tree-sitter-grammars",
+        "repo": "tree-sitter-go-sum"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v1.0.0",
+      "revision": "afd6da80a9509c2edbc0f3ea540564d100babd67",
+      "url": "https://api.github.com/repos/tree-sitter-grammars/tree-sitter-go-sum/tarball/v1.0.0",
+      "hash": "1xmcdfygd5j60hqa03i4wdvw0hf9d0jm4j7h7vik7w58mwzk3hms"
+    },
     "tree-sitter-json": {
       "type": "GitRelease",
       "repository": {
@@ -152,9 +182,9 @@
         "repo": "tree-sitter-nix"
       },
       "branch": "master",
-      "revision": "0fdada10f1f845ca9116e279ad8f5d0ca93e9949",
-      "url": "https://github.com/nix-community/tree-sitter-nix/archive/0fdada10f1f845ca9116e279ad8f5d0ca93e9949.tar.gz",
-      "hash": "1vnf28sgzck9i020is5m5ff95b6sxp2kams21nwrajvq66a38xl6"
+      "revision": "919613dcff7bdc38b946ea5f767dec25ee1ed129",
+      "url": "https://github.com/nix-community/tree-sitter-nix/archive/919613dcff7bdc38b946ea5f767dec25ee1ed129.tar.gz",
+      "hash": "1vl89i4lpkj5n4bdq59syc0ivbpms9xyak33rzwgaqly0lyfxsgw"
     },
     "tree-sitter-python": {
       "type": "GitRelease",
