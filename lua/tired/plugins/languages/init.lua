@@ -1,8 +1,9 @@
 return {
+  { import = "lazyvim.plugins.extras.lang.go" },
   { import = "lazyvim.plugins.extras.lang.json" },
+  { import = "lazyvim.plugins.extras.lang.python" },
   { import = "lazyvim.plugins.extras.lang.rust" },
   { import = "lazyvim.plugins.extras.lang.yaml" },
-  { import = "lazyvim.plugins.extras.lang.python" },
 
   { import = "tired.plugins.languages.bash" },
   { import = "tired.plugins.languages.lua" },

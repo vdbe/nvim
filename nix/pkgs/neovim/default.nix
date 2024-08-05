@@ -66,6 +66,14 @@ let
         shfmt
       ];
 
+      go = [
+        gofumpt
+        gomodifytags
+        gopls
+        gotools
+        impl
+      ];
+
       lua = [
         lua-language-server
 
