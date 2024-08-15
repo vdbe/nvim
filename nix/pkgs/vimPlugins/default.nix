@@ -8,7 +8,7 @@
 }:
 let
   inherit (builtins) mapAttrs replaceStrings;
-  inherit (lib.attrsets) mapAttrs';
+  inherit (lib.attrsets) mapAttrs' recursiveUpdate;
   inherit (lib.fixedPoints) extends;
   inherit (lib.strings) toLower;
 
@@ -16,13 +16,18 @@ let
 
   pluginSources = mapAttrs' (n: v: {
     name = renamePlugin n;
-    value = v;
+    value = recursiveUpdate {
+      repository = {
+
+        repo = n;
+      };
+    } v;
   }) (import ../../sources/plugins);
 
   mkPlugins = mapAttrs (
     n: v:
     buildVimPlugin {
-      pname = v.repository.repo or n;
+      pname = v.repository.repo or v.originalName or n;
       version = v.version or v.revision;
       src = v;
     }

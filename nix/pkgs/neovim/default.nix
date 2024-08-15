@@ -135,6 +135,7 @@ let
       nvim-dap-python
 
       nvim-lspconfig
+      lsp_lines-nvim
 
       nvim-treesitter
       nvim-treesitter-textobjects

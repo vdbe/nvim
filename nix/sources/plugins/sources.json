@@ -363,6 +363,20 @@
       "url": "https://api.github.com/repos/linrongbin16/lsp-progress.nvim/tarball/v1.0.13",
       "hash": "0h63z55gwv36rahhha8vkbxb9n4f8psa265khz719i97j17x39rr"
     },
+    "lsp_lines.nvim": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "Git",
+        "url": "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": null,
+      "version": "v3.0.0",
+      "revision": "d1b2e6e618c8280c3ab2b01738ff6c9e2278c7be",
+      "url": null,
+      "hash": "1w1nmh3nkci7w1apk0mx5sdwlgi4ilkgx3cgxl79iv5bwwyfdjs2"
+    },
     "lspkind.nvim": {
       "type": "Git",
       "repository": {
