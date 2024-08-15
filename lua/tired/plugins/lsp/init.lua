@@ -44,7 +44,7 @@ return {
       -- return lspconfig_spec.opts()
     end,
   },
-  -- Diagnostics in virutal lines
+  -- Diagnostics in virtual lines
   {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     lazy = true,
