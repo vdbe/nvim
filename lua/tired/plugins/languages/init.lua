@@ -3,6 +3,7 @@ return {
   { import = "lazyvim.plugins.extras.lang.json" },
   { import = "lazyvim.plugins.extras.lang.python" },
   { import = "lazyvim.plugins.extras.lang.yaml" },
+  { import = "lazyvim.plugins.extras.lang.clangd" },
 
   { import = "tired.plugins.languages.bash" },
   { import = "tired.plugins.languages.lua" },

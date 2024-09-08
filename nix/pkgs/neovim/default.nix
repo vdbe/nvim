@@ -66,6 +66,12 @@ let
         shfmt
       ];
 
+      c = [
+        clang-tools
+      ];
+
+      cpp = c;
+
       go = [
         gofumpt
         gomodifytags
@@ -162,6 +168,7 @@ let
 
       crates-nvim
       rustaceanvim
+      clangd_extensions-nvim
 
       # Dependencies
       mini-icons
