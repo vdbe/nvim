@@ -1,4 +1,9 @@
-{ lib, callPackage, ... }:
+{
+  lib,
+  callPackage,
+  pkgs,
+  ...
+}:
 self: super: {
   AstroNvim = super.AstroNvim.overrideAttrs { dependencies = with self; [ astrocore ]; };
 
@@ -10,6 +15,25 @@ self: super: {
   telescope-fzf-native-nvim = super.telescope-fzf-native-nvim.overrideAttrs {
     dependencies = with self; [ telescope-nvim ];
     buildPhase = "make";
+    meta.platforms = lib.platforms.all;
+  };
+
+  fzy-lua-native = super.fzy-lua-native.overrideAttrs {
+    # remove pre-compiled binaries
+    preBuild = ''
+      rm -rf static/*;
+      rm -rf src/*.so;
+    '';
+
+    buildPhase = ''
+      runHook preBuild
+      make
+    '';
+
+    installPhase = ''
+      install -Dm 444 -t $out/static static/*
+      install -Dm 444 -t $out/lua lua/*
+    '';
     meta.platforms = lib.platforms.all;
   };
 

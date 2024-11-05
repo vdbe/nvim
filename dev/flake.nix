@@ -85,6 +85,8 @@
 
                 # other
                 typos
+
+                vim-startuptime
               ];
             };
           };

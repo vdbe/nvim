@@ -1,156 +1,81 @@
 {
-  pkgs,
   lib,
-  tree-sitter,
-  vimUtils,
+
   neovimUtils,
-  vimPlugins,
   neovim-unwrapped,
-  withPython3 ? true,
-  withNodeJs ? false,
-  withRuby ? false,
-  vimAlias ? false,
-  viAlias ? false,
-  nvim-src ? import ./nvim-src.nix { inherit lib; },
-  treesitter-grammars ? vimPlugins.nvim-treesitter.allGrammars,
-  extraName ? "my",
+  wrapNeovimUnstable,
+  vimUtils,
+  vimPlugins,
+
+  pname ? "mynvim",
   version ? "unknown-dirty",
-  plugins ? [ ],
-  extraPackages ? [ ],
-  lspPackages ? { },
-  extraLspPackages ? { },
-  excludeLspLanguages ? [ "rust" ],
-  luaRc ? builtins.readFile ../../../init.lua,
-  # Extras
-  extraPlugins ? [ ],
-  extraExtraPackages ? [ ],
+  baseConfig ? { },
+  luaRcContent ? "require('vdbe')",
+  plugins ? {
+    opt = [ ];
+    start = [ ];
+  },
+  config-src ? import ./config-src.nix { inherit lib; },
+  tree-sitter,
+  treesitter-grammars ? vimPlugins.nvim-treesitter.allGrammars,
   ...
 }:
 let
-  inherit (builtins)
-    map
-    mapAttrs
-    attrNames
-    attrValues
-    listToAttrs
-    removeAttrs
-    ;
-  inherit (lib.lists)
-    optional
-    optionals
-    unique
-    flatten
-    ;
-  inherit (lib.attrsets) recursiveUpdate;
+  normalizePlugin =
+    optional: plugin:
+    let
+      defaultPlugin = {
+        plugin = null;
+        config = null;
+        inherit optional;
+      };
+    in
+    defaultPlugin // (if (plugin ? plugin) then plugin else { inherit plugin; });
 
-  config = vimUtils.buildVimPlugin {
+  normalizedPlugins =
+    let
+
+      opt =
+        let
+          normalizePlugin' = normalizePlugin true;
+        in
+        map normalizePlugin' (plugins.opt or [ ]);
+      start =
+        let
+          normalizePlugin' = normalizePlugin false;
+        in
+        map normalizePlugin' (plugins.start or [ ]);
+    in
+    opt ++ start;
+
+  # User config
+  neovimConfig = vimUtils.buildVimPlugin {
     inherit version;
-    pname = "neovim-config-lua${extraName}";
-
-    src = nvim-src;
+    pname = "${pname}-config";
+    src = config-src;
   };
 
   parsers = vimUtils.buildVimPlugin {
     inherit version;
 
-    pname = "parsers${extraName}";
+    pname = "${pname}-parsers";
 
     src = tree-sitter.withPlugins (_: treesitter-grammars);
     path = "parser";
   };
+  neovimConfigNormalized = normalizePlugin false neovimConfig;
 
-  plugins' = plugins ++ extraPlugins;
-  packages' = extraPackages ++ extraExtraPackages;
-
-  lspPackages' =
-    let
-      languages = unique ((attrNames lspPackages) ++ (attrNames extraLspPackages));
-      mergeLanguage =
-        language: unique ((lspPackages.${language} or [ ]) ++ (extraLspPackages.${language} or [ ]));
-      combinedLspPackages = listToAttrs (
-        map (language: {
-          name = language;
-          value = mergeLanguage language;
-        }) languages
-      );
-      allLanguages = unique (flatten (attrValues (removeAttrs combinedLspPackages excludeLspLanguages)));
-    in
-    combinedLspPackages // { inherit allLanguages; };
-
-  neovimConfig = neovimUtils.makeNeovimConfig {
-    inherit
-      withPython3
-      withNodeJs
-      withRuby
-      vimAlias
-      viAlias
-      ;
-    plugins =
-      [ config ]
-      ++ optional (treesitter-grammars != [ ]) parsers
-      ++ (map (plugin: {
-        inherit plugin;
-        optional = true;
-      }) plugins');
+  config = baseConfig // {
+    # inherit luaRcContent;
+    luaRcContent =
+      ''
+        vim.g.is_nix = true;
+      ''
+      + luaRcContent;
+    plugins = normalizedPlugins ++ [
+      neovimConfigNormalized
+      parsers
+    ];
   };
-
-  # Extract packpathDirs so we can set the path in `vim.g`
-  inherit (neovimConfig) packpathDirs;
-  neovimConfig' = neovimConfig // {
-    packpathDirs.myNeovimPackages = {
-      start = [ ];
-      opt = [ ];
-    };
-  };
-
-  packpath = vimUtils.packDir packpathDirs;
-
-  neovim-unwrapped' = neovim-unwrapped.overrideAttrs { treesitter-parsers = { }; };
-
-  mkMynvim =
-    packages'':
-    pkgs.wrapNeovimUnstable neovim-unwrapped' (
-      lib.recursiveUpdate neovimConfig' {
-        inherit extraName;
-        wrapperArgs = lib.escapeShellArgs (
-          neovimConfig.wrapperArgs
-          ++ (
-            optionals (packpathDirs.myNeovimPackages.start != [ ] || packpathDirs.myNeovimPackages.opt != [ ]) [
-              "--add-flags"
-              ''--cmd "set packpath^=${packpath}"''
-              "--add-flags"
-              ''--cmd "set rtp^=${packpath}"''
-            ]
-            ++ optionals (packages'' != [ ]) [
-              "--suffix"
-              "PATH"
-              ":"
-              "${lib.makeBinPath (unique packages'')}"
-            ]
-
-          )
-        );
-
-        luaRcContent =
-          ''
-            vim.g.is_nix = true
-            vim.g.nix_packpath = "${packpath}"
-          ''
-          + luaRc;
-      }
-    );
-
-  # TODO: make it passthru recurisve somehow 
-  # `.#default.withLsp.nix.lua`
-  mynvim = mkMynvim packages';
-  withLsp = (mkMynvim (packages' ++ lspPackages'.allLanguages)).overrideAttrs (
-    _: previousAttrs: {
-      passthru = recursiveUpdate previousAttrs.passthru (
-        mapAttrs (_: value: mkMynvim (packages' ++ value)) lspPackages'
-      );
-    }
-  );
 in
-mynvim.overrideAttrs (
-  _: previousAttrs: { passthru = recursiveUpdate previousAttrs.passthru { inherit withLsp; }; }
-)
+wrapNeovimUnstable neovim-unwrapped config

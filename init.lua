@@ -1,1 +1,1 @@
-require "tired.config.lazy"
+require "vdbe"

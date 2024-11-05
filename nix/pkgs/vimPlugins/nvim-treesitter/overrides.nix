@@ -55,7 +55,8 @@ in
   '';
 
   patches = super.patches or [ ] ++ [
-    ../patches/nvim-treesitter/add-option-to-disable-installing.patch
+    # ../patches/nvim-treesitter/add-option-to-disable-installing.patch
+    ../patches/nvim-treesitter/remove-install.patch
   ];
 
   passthru = (super.nvim-treesitter.passthru or { }) // {
